@@ -115,15 +115,12 @@ class _MyOrdersState extends State<MyOrders> {
       _loading = true;
     });
 
-    SharedPreferences prefs = await _prefs;
-    phoneNumber = await (prefs.getString('settings_phoneUser') ?? '');
-
     try {
       const url = 'http://195.34.205.251:35844/tehnotop/hs/app/v1/getdata';
 
       var jsonPost = '{"method":"get_client_orders", '
           '"authorization":"38597848-s859-f588-g5568-1245986532sd", '
-          '"phone":"$phoneNumber"}';
+          '"phone":"$constPhoneNumber"}';
 
       const headersPost = {
         'Content-Type': 'application/json',

@@ -104,15 +104,7 @@ class _DeliveryMethodState extends State<DeliveryMethod> {
                             ),
                           ],
                         ),
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(item['image']),
-                            ),
-                          ),
-                        ),
+                        Icon(Icons.local_shipping, color: primaryColor,),
                       ],
                     ),
                   ),

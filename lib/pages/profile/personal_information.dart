@@ -182,43 +182,34 @@ class _PersonalInformationState extends State<PersonalInformation> {
                     heightSpace,
                     InkWell(
                       onTap: () async {
-                        try {
-                          final picker = ImagePicker();
-                          Directory directory = await getApplicationDocumentsDirectory();
 
-                          String path = directory.path;
+                        final picker = ImagePicker();
+                        Directory directory = await getApplicationDocumentsDirectory();
 
-                          if (path == '') {
-                            throw MissingPlatformDirectoryException(
-                                'Доступ до каталогу програми заборонено!');
-                          }
+                        String path = directory.path;
 
-                          final XFile pickedImage = await picker.pickImage(source: ImageSource.camera);
+                        if (path == '') {
+                          throw MissingPlatformDirectoryException(
+                              'Доступ до каталогу програми заборонено!');
+                        }
 
-                          if (pickedImage == null) return;
+                        final XFile pickedImage = await picker.pickImage(source: ImageSource.camera);
 
-                          File tmpFile = File(pickedImage.path);
-                          tmpFile = await tmpFile.copy('$path/avatar.jpg');
+                        if (pickedImage == null) return;
 
-                          final SharedPreferences prefs = await _prefs;
-                          prefs.setString("settings_avatarUser", tmpFile.path);
+                        File tmpFile = File(pickedImage.path);
+                        tmpFile = await tmpFile.copy('$path/avatar.jpg');
 
-                          constAvatarUserPath = tmpFile.path;
+                        final SharedPreferences prefs = await _prefs;
+                        prefs.setString("settings_avatarUser", tmpFile.path);
 
-                          setState(() {
-                            image = tmpFile;
-                          });
+                        constAvatarUserPath = tmpFile.path;
 
-                          Navigator.pop(context);
+                        setState(() {
+                          image = tmpFile;
+                        });
 
-                      } on PlatformException catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              content: Text(
-                              'Помилка обробки фото'),
-                              duration: const Duration(seconds: 2)));
-                      }
-
+                        Navigator.pop(context);
                       },
                       child: Container(
                         padding: EdgeInsets.all(10.0),

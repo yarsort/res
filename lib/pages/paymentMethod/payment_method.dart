@@ -30,6 +30,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
       'image': 'assets/paymentMethod/cash.png',
       'method': 'Кредит "Приват"',
     },
+    {
+      'image': 'assets/paymentMethod/cash.png',
+      'method': 'Кредит "Альфа Банк"',
+    },
   ];
 
   @override
@@ -130,15 +134,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             ),
                           ],
                         ),
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage(item['image']),
-                            ),
-                          ),
-                        ),
+                        Icon(Icons.payments, color: primaryColor,),
                       ],
                     ),
                   ),

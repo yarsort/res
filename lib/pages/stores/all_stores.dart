@@ -1,4 +1,5 @@
 import 'package:tehnotop/pages/screen.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class AllStore extends StatelessWidget {
 
@@ -81,12 +82,12 @@ class AllStore extends StatelessWidget {
                               children: [
                                 Text(
                                   item['name'],
-                                  style: darkBlueColor13SemiBoldTextStyle,
+                                  style: primaryColor12SemiBoldTextStyle,
                                 ),
                                 Row(
                                   children: [
                                     Text(item['type'],
-                                      style: primaryColor12SemiBoldTextStyle,
+                                      style: greyColor12MediumTextStyle,
                                     ),
                                     widthSpace,
                                     Icon(
@@ -98,10 +99,10 @@ class AllStore extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Text(
-                              '${item['ratedPeopleCount']} людини порадили',
-                              style: greyColor13MediumTextStyle,
-                            ),
+                            // Text(
+                            //   '${item['ratedPeopleCount']} людини порадили',
+                            //   style: greyColor13MediumTextStyle,
+                            // ),
                           ],
                         ),
                       ),
@@ -121,7 +122,7 @@ class AllStore extends StatelessWidget {
                       Expanded(
                         child: Text(
                           item['address'],
-                          style: greyColor12MediumTextStyle,
+                          style: darkBlueColor12MediumTextStyle,
                         ),
                       ),
                     ],
@@ -138,9 +139,24 @@ class AllStore extends StatelessWidget {
                       ),
                       widthSpace,
                       Expanded(
-                        child: Text(
-                          item['phoneNumber'],
-                          style: greyColor12MediumTextStyle,
+                        child: GestureDetector(
+                          onTap: () async {
+                            callDialog(context, item);
+                        },
+                          child: Row(
+                            children: [
+                              Text(
+                                item['phoneNumber'],
+                                style: darkBlueColor12MediumTextStyle,
+                              ),
+                              widthSpace,
+                              Text(
+                                'Подзвонити',
+                                style: greyColor12MediumTextStyle,
+                              ),
+
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -148,6 +164,94 @@ class AllStore extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+        );
+      },
+    );
+  }
+
+  callDialog(context, item) {
+    var tel = item['phoneNumber'].replaceAll('+', '');
+    tel = tel.replaceAll(')', '');
+    tel = tel.replaceAll('(', '');
+    tel = tel.replaceAll('-', '');
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: bgColor,
+          shape:
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          insetPadding: EdgeInsets.symmetric(horizontal: fixPadding * 5.0),
+          child: Wrap(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(fixPadding * 1.5),
+                child: Column(
+                  children: [
+                    Text(
+                      'Зателефонувати в магазин? \n \n'
+                          '${item['address']} \n \n'
+                          '${item['phoneNumber']}',
+                      style: darkBlueColor15SemiBoldTextStyle,
+                    ),
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              padding: EdgeInsets.all(fixPadding),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: primaryColor),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Text(
+                                'Ні',
+                                style: primaryColor15BoldTextStyle,
+                              ),
+                            ),
+                          ),
+                        ),
+                        widthSpace,
+                        widthSpace,
+                        widthSpace,
+                        widthSpace,
+                        Expanded(
+                          child: InkWell(
+                            onTap: () async {
+                              await FlutterPhoneDirectCaller.callNumber(tel);
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(fixPadding),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: primaryColor,
+                                border: Border.all(color: primaryColor),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Text(
+                                'Так',
+                                style: whiteColor15BoldTextStyle,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         );
       },

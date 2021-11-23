@@ -427,7 +427,7 @@ class _SignUpState extends State<SignUp> {
                 MaterialPageRoute(
                     builder: (context) =>
                         Otp(phoneNumber,codeSMS.toString())));
-          };
+          }
         },
         child: Container(
           height: 50,
