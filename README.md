@@ -1,16 +1,16 @@
-# tehnotop
+# ua.com.yarsort.tehnotop
 
-A new Flutter project.
+ТМ "Технотоп".
 
-## Getting Started
+Приложение для покупателя компании Технотоп.
 
-This project is a starting point for a Flutter application.
+## Начало работы
 
-A few resources to get you started if this is your first Flutter project:
+Проект реализован в рамках внедрения программного обеспечения для клиентов компании "Технотоп"
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Проект написан на чистом Flutter и подоерживается компанией "Yarsort"
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Сайт компании "Технотоп"](https://tehnotop.ua)
+- [Сайт компании "Yarsort"](https://yarsort.com.ua)
+
+Для обращения по поводу проблем с прграммным обеспечением обращатся на почту: yarsort@gmail.com
