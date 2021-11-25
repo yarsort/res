@@ -3,7 +3,7 @@ import 'dart:io';
 import 'model.dart';
 
 // Основные цвета программы
-const Color primaryColor = Color(0xffff4200);
+const Color primaryColor = Color.fromRGBO(255, 85, 0, 1.0);
 const Color bgColor = Color(0xffF0F1F8);
 const Color lightBlueColor = Color(0xffDEE2EB);
 const Color darkBlueColor = Color(0xff022e4c);

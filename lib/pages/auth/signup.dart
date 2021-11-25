@@ -164,10 +164,9 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -175,29 +174,36 @@ class _SignUpState extends State<SignUp> {
           icon: Icon(Icons.arrow_back_ios),
         ),
       ),
-      body: Stack(
-        children: [
-          ListView(
-            physics:
-            BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      body: SizedBox(
+        height: screenHeight - keyboardHeight,
+        child: SingleChildScrollView(
+          child: Column(
             children: [
+              cornerImage(),
               heightSpace,
               heightSpace,
-              Padding(
-                padding: const EdgeInsets.fromLTRB(fixPadding * 2.0, fixPadding,
-                    fixPadding * 2.0, fixPadding * 2.0),
-                child: Text(
-                  'Реєстрація покупця',
-                  style: darkBlueColor22BoldTextStyle,
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(fixPadding * 2.0, fixPadding,
+                        fixPadding * 2.0, fixPadding * 2.0),
+                    child: Text(
+                      'Реєстрація покупця',
+                      style: darkBlueColor22BoldTextStyle,
+                    ),
+                  ),
+                ],
               ),
               userNameTextField(),
               emailTextField(),
               phoneNumberTextField(),
+              const SizedBox(height: 200),
               //passwordTextField(),
+              //Text('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'),
             ],
           ),
-        ],
+        ),
       ),
       bottomNavigationBar: signupButton(),
     );
@@ -458,6 +464,15 @@ class _SignUpState extends State<SignUp> {
         color: greyColor,
         height: 1.0,
       ),
+    );
+  }
+
+  cornerImage() {
+    return Image.asset(
+      'assets/logo.png',
+      height: 100.0,
+      width: 100.0,
+      fit: BoxFit.none,
     );
   }
 }

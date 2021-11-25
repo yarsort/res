@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tehnotop/pages/screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -75,8 +74,8 @@ class _SplashScreenState extends State<SplashScreen> {
   logo() {
     return Image.asset(
       'assets/app_logo.png',
-      height: 110,
-      width: 110,
+      height: 100,
+      width: 100,
       fit: BoxFit.cover,
     );
   }

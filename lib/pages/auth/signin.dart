@@ -154,8 +154,11 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+
     return Scaffold(
+        resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: Row(
           children: [
@@ -169,25 +172,27 @@ class _SignInState extends State<SignIn> {
           ],
         ),
       ),
-      body: Stack(
-        children: [
-          ListView(
-            physics:
-                BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      body: SizedBox(
+        height: screenHeight - keyboardHeight,
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              heightSpace,
-              heightSpace,
-              Padding(
-                padding: const EdgeInsets.fromLTRB(fixPadding * 2.0, fixPadding,
-                    fixPadding * 2.0, fixPadding * 2.0),
-                child: Text(
-                  'Авторизація',
-                  style: darkBlueColor22BoldTextStyle,
-                ),
-              ),
-              SizedBox(height: 50,),
               cornerImage(),
-              SizedBox(height: 50,),
+              heightSpace,
+              heightSpace,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(fixPadding * 2.0, fixPadding,
+                        fixPadding * 2.0, fixPadding * 2.0),
+                    child: Text(
+                      'Авторизація',
+                      style: darkBlueColor22BoldTextStyle,
+                    ),
+                  ),
+                ],
+              ),
               userNameTextField(),
               Text(
                 'Вкажіть Ваш номер телефону в повному форматі',
@@ -199,11 +204,13 @@ class _SignInState extends State<SignIn> {
                 style: greyColor13RegularTextStyle,
                 textAlign: TextAlign.center,
               ),
+              signinButton(),
+              const SizedBox(height: 200),
             ],
           ),
-        ],
+        ),
       ),
-      bottomNavigationBar: signinButton(),
+      //bottomNavigationBar: signinButton(),
     );
   }
 
