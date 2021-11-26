@@ -25,7 +25,7 @@ class Bonus {
   }
 }
 
-class Order {
+class OrderFromBase {
   String docUIDClient;
   String docNameClient;
   DateTime docDate;
@@ -39,7 +39,7 @@ class Order {
   String docStore;
   int docItemsCount;
 
-  Order(
+  OrderFromBase(
       { this.docUIDClient,
         this.docNameClient,
         this.docDate,
@@ -53,7 +53,7 @@ class Order {
         this.docStore,
         this.docItemsCount});
 
-  Order.fromJson(Map<String, dynamic> json) {
+  OrderFromBase.fromJson(Map<String, dynamic> json) {
     docUIDClient = json['docUIDClient'];
     docNameClient = json['docNameClient'];
     docDate = DateTime.parse(json['docDate']);
@@ -85,7 +85,7 @@ class Order {
     return data;
   }
 
-  static Map<String, dynamic> toMap(Order order) => {
+  static Map<String, dynamic> toMap(OrderFromBase order) => {
     'docUIDClient': order.docUIDClient,
     'docNameClient': order.docNameClient,
     'docDate': order.docDate,
@@ -100,12 +100,12 @@ class Order {
     'docItemsCount': order.docItemsCount,
   };
 
-  static String encode(List<Order> orders) => json.encode(
-    orders.map<Map<String, dynamic>>((item) => Order.toMap(item)).toList(),
+  static String encode(List<OrderFromBase> orders) => json.encode(
+    orders.map<Map<String, dynamic>>((item) => OrderFromBase.toMap(item)).toList(),
   );
 }
 
-class OrderItem {
+class OrderItemFromBase {
   String numberRow;
   String name;
   String unit;
@@ -114,7 +114,7 @@ class OrderItem {
   double sum;
   double sumBonus;
 
-  OrderItem(
+  OrderItemFromBase(
       { this.numberRow,
         this.name,
         this.unit,
@@ -122,7 +122,7 @@ class OrderItem {
         this.sum,
         this.sumBonus});
 
-  OrderItem.fromJson(Map<String, dynamic> json) {
+  OrderItemFromBase.fromJson(Map<String, dynamic> json) {
     numberRow = json['numberRow'];
     name = json['name'];
     unit = json['unit'];
@@ -141,6 +141,59 @@ class OrderItem {
     data['price'] = this.price;
     data['sum'] = this.sum;
     data['sumBonus'] = this.sumBonus;
+    return data;
+  }
+}
+
+class Item {
+  String uuid;
+  String code;
+  String article;
+  String name;
+  String unit;
+  int count;
+  double price;
+  double sum;
+  double sumBonus;
+  String image;
+
+  Item(
+      { this.uuid,
+        this.code,
+        this.article,
+        this.name,
+        this.unit,
+        this.count,
+        this.price,
+        this.sum,
+        this.sumBonus,
+        this.image});
+
+  Item.fromJson(Map<String, dynamic> json) {
+    uuid = json['uuid'];
+    code = json['code'];
+    article = json['article'];
+    name = json['name'];
+    unit = json['unit'];
+    count = int.parse(json['count']);
+    price = double.parse(json['price']);
+    sum = double.parse(json['sum']);
+    sumBonus = double.parse(json['sumBonus']);
+    image = json['image'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['uuid'] = this.uuid;
+    data['code'] = this.code;
+    data['article'] = this.article;
+    data['name'] = this.name;
+    data['unit'] = this.unit;
+    data['count'] = this.count;
+    data['price'] = this.price;
+    data['sum'] = this.sum;
+    data['sumBonus'] = this.sumBonus;
+    data['image'] = this.image;
     return data;
   }
 }

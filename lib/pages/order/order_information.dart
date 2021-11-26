@@ -1,12 +1,11 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:tehnotop/pages/screen.dart';
+import 'package:tehnotop/constants/screens.dart';
 import 'package:tehnotop/widget/column_builder.dart';
 
 class OrderItemsInformation extends StatefulWidget {
-  final Order order;
+  final OrderFromBase order;
 
   const OrderItemsInformation(this.order) : super();
 
@@ -15,7 +14,7 @@ class OrderItemsInformation extends StatefulWidget {
 }
 
 class _OrderItemsInformationState extends State<OrderItemsInformation> {
-  List<OrderItem> listItemsOrder = [];
+
   bool _loading = false;
   String phoneNumber;
   String uuidOrder;
@@ -152,7 +151,7 @@ class _OrderItemsInformationState extends State<OrderItemsInformation> {
         }
 
         // Очистка списка полученных заказов
-        listItemsOrder.clear();
+        globalListItemsOrder.clear();
 
         // Обход цикла заказов
         for (var order in myResponse['documents']) {
@@ -160,15 +159,15 @@ class _OrderItemsInformationState extends State<OrderItemsInformation> {
           for (var docItem in order['docItems']) {
 
             // Запись в список заказов
-            OrderItem newOrderItem = OrderItem.fromJson(docItem);
+            OrderItemFromBase newOrderItem = OrderItemFromBase.fromJson(docItem);
 
-            listItemsOrder.add(newOrderItem);
+            globalListItemsOrder.add(newOrderItem);
           }
         }
 
         // Отладка :)
         debugPrint('Успешно! Загружено: ' +
-            listItemsOrder.length.toString() +
+            globalListItemsOrder.length.toString() +
             ' позиций заказа');
 
         setState(() {
@@ -525,9 +524,9 @@ class _OrderItemsInformationState extends State<OrderItemsInformation> {
             child: Column(
               children: [
                 ColumnBuilder(
-                    itemCount: listItemsOrder.length,
+                    itemCount: globalListItemsOrder.length,
                     itemBuilder: (context, index) {
-                      final item = listItemsOrder[index];
+                      final item = globalListItemsOrder[index];
                       return Column(children: [
                         orderInformationRow(
                             title: item.name,
@@ -601,9 +600,9 @@ class _OrderItemsInformationState extends State<OrderItemsInformation> {
             child: Column(
               children: [
                 ColumnBuilder(
-                    itemCount: listItemsOrder.length,
+                    itemCount: globalListItemsOrder.length,
                     itemBuilder: (context, index) {
-                      final item = listItemsOrder[index];
+                      final item = globalListItemsOrder[index];
                       return Column(children: [
                         orderInformationRow(
                             title: item.name,

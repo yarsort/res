@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tehnotop/pages/screen.dart';
+import 'package:tehnotop/constants/screens.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class BottomBar extends StatefulWidget {

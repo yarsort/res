@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tehnotop/pages/screen.dart';
+import 'package:tehnotop/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PersonalInformation extends StatefulWidget {

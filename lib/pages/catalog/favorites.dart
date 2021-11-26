@@ -1,5 +1,5 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:tehnotop/pages/screen.dart';
+import 'package:tehnotop/constants/screens.dart';
 
 class Favorites extends StatefulWidget {
   @override
@@ -59,7 +59,7 @@ class _FavoritesState extends State<Favorites> {
           icon: Icon(Icons.arrow_back_ios),
         ),
         title: Text(
-          'Favorites',
+          'Список бажань',
           style: darkBlueColor18SemiBoldTextStyle,
         ),
       ),
@@ -79,7 +79,7 @@ class _FavoritesState extends State<Favorites> {
             size: 60.0,
           ),
           Text(
-            'No items in favorite',
+            'Ви нічого не ',
             style: greyColor14MediumTextStyle,
           ),
         ],
@@ -108,7 +108,7 @@ class _FavoritesState extends State<Favorites> {
                     favoriteList.removeAt(index);
                   });
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('Позиція видалена з Улюбленого.'),
+                    content: Text('Позиція видалена зі списку'),
                   ));
                 },
               ),

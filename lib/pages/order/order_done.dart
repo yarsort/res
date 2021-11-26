@@ -1,4 +1,4 @@
-import 'package:tehnotop/pages/screen.dart';
+import 'package:tehnotop/constants/screens.dart';
 
 class OrderDone extends StatelessWidget {
   @override

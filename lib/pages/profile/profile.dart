@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:tehnotop/pages/screen.dart';
+import 'package:tehnotop/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
@@ -55,7 +55,7 @@ class _ProfileState extends State<Profile> {
                         MaterialPageRoute(
                             builder: (context) => PaymentMethod()),
                       ),
-                  icon: 'assets/icons/payment_method.png',
+                  icon: Icons.credit_card,
                   title: 'Способи оплати',
                   color: darkBlueColor,
                 ),
@@ -64,7 +64,7 @@ class _ProfileState extends State<Profile> {
                     context,
                     MaterialPageRoute(builder: (context) => DeliveryMethod()),
                   ),
-                  icon: 'assets/icons/location.png',
+                  icon: Icons.place,
                   title: 'Адреси доставки',
                   color: darkBlueColor,
                 ),
@@ -90,7 +90,7 @@ class _ProfileState extends State<Profile> {
                         MaterialPageRoute(
                             builder: (context) => Notifications()),
                       ),
-                  icon: 'assets/icons/notification.png',
+                  icon: Icons.notifications,
                   title: 'Нагадування',
                   color: darkBlueColor,
                 ),
@@ -102,8 +102,18 @@ class _ProfileState extends State<Profile> {
                       MaterialPageRoute(builder: (context) => BottomBar()),
                     );
                   },
-                  icon: 'assets/icons/my_order.png',
+                  icon: Icons.list_alt,
                   title: 'Замовлення',
+                  color: darkBlueColor,
+                ),
+                profileDetailsRow(
+                  ontap: () =>
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyCart()),
+                      ),
+                  icon: Icons.shopping_cart,
+                  title: 'Кошик покупок',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
@@ -112,7 +122,7 @@ class _ProfileState extends State<Profile> {
                         context,
                         MaterialPageRoute(builder: (context) => Settings()),
                       ),
-                  icon: 'assets/icons/settings.png',
+                  icon: Icons.settings,
                   title: 'Налаштування',
                   color: darkBlueColor,
                 ),
@@ -122,7 +132,7 @@ class _ProfileState extends State<Profile> {
                         context,
                         MaterialPageRoute(builder: (context) => Support()),
                       ),
-                  icon: 'assets/icons/support.png',
+                  icon: Icons.help_center,
                   title: 'Підтримка',
                   color: darkBlueColor,
                 ),
@@ -132,7 +142,7 @@ class _ProfileState extends State<Profile> {
           profileDetails(
             child: profileDetailsRow(
               ontap: () => logoutDialog(),
-              icon: 'assets/icons/logout.png',
+              icon: Icons.logout,
               title: 'Вихід',
               color: primaryColor,
             ),
@@ -272,7 +282,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  profileDetailsRow({Function ontap, String icon, String title, Color color}) {
+  profileDetailsRow({Function ontap, IconData icon, String title, Color color}) {
     return InkWell(
       onTap: ontap,
       child: Padding(
@@ -282,12 +292,7 @@ class _ProfileState extends State<Profile> {
           children: [
             Row(
               children: [
-                Image.asset(
-                  icon,
-                  height: 18,
-                  width: 18,
-                  color: color,
-                ),
+                Icon(icon, color: color),
                 widthSpace,
                 widthSpace,
                 widthSpace,

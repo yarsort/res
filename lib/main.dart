@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'pages/screen.dart';
+import 'constants/screens.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

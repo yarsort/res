@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:tehnotop/pages/screen.dart';
+import 'package:tehnotop/constants/screens.dart';
 import 'package:tehnotop/widget/column_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:barcode_widget/barcode_widget.dart';
@@ -49,14 +49,14 @@ class _HomeState extends State<Home> {
 
     // Автоматически обновляем только один раз при открытии или
     // через каждые 5 минут при переоткрытии окна
-    if (constListBonuses.isEmpty) {
+    if (globalListBonuses.isEmpty) {
       _loadData();
     }else{
       var diffDateSeconds = dateFutureUpdatingBonus.difference(DateTime.now()).inSeconds;
       if (diffDateSeconds < 0) {
         _loadData();
       }else{
-        listBonuses = constListBonuses;
+        listBonuses = globalListBonuses;
       }
     }
   }
@@ -245,7 +245,7 @@ class _HomeState extends State<Home> {
           _loadDefaultBonus();
         });
 
-        constListBonuses = listBonuses;
+        globalListBonuses = listBonuses;
 
       } else {
 

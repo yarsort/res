@@ -19,12 +19,21 @@ const SizedBox heightSpace = SizedBox(height: 5.0);
 const SizedBox widthSpace = SizedBox(width: 5.0);
 
 // Список бонусов покупателя
-List<Bonus> constListBonuses = [];
+List<Bonus> globalListBonuses = [];
 
 // Список заказов покупателя
-List<Order> constListOrders = [];
+List<OrderFromBase> globalListOrders = [];
 
-// Тело картинки аватара покупателя в настройках
+// Список позиций заказа покупателя
+List<OrderItemFromBase> globalListItemsOrder = [];
+
+// Список позиций списка желаний
+List<Item> globalListItemsFavourite = [];
+
+// Список позиций корзины покупателя
+List<Item> globalListItemsBasket = [];
+
+// Тело картинки аватара покупателя в настройках. Не используеться пока-что...
 File constImageAvatar;
 
 // Путь к файлу аватара покупателя в настройках

@@ -1,9 +1,9 @@
+import 'package:tehnotop/constants/screens.dart';
 import 'dart:convert';
 export 'package:tehnotop/constants/model.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tehnotop/pages/screen.dart';
 import 'package:tehnotop/widget/column_builder.dart';
 
 class MyOrders extends StatefulWidget {
@@ -14,7 +14,7 @@ class MyOrders extends StatefulWidget {
 class _MyOrdersState extends State<MyOrders> {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
-  List<Order> listOrders = [];
+  List<OrderFromBase> listOrders = [];
   bool _loading = false;
   String phoneNumber;
 
@@ -25,14 +25,14 @@ class _MyOrdersState extends State<MyOrders> {
 
     // Автоматически обновляем только один раз при открытии или
     // через каждые 5 минут при переоткрытии окна
-    if (constListOrders.isEmpty) {
+    if (globalListOrders.isEmpty) {
       _loadData();
     }else{
       var diffDateSeconds = dateFutureUpdatingOrders.difference(DateTime.now()).inSeconds;
       if (diffDateSeconds < 0) {
         _loadData();
       }else{
-        listOrders = constListOrders;
+        listOrders = globalListOrders;
       }
     }
   }
@@ -179,7 +179,7 @@ class _MyOrdersState extends State<MyOrders> {
         // Обход цикла заказов
         for (var order in myResponse['documents']) {
           // Запись в список заказов
-          Order newOrder = Order.fromJson(order);
+          OrderFromBase newOrder = OrderFromBase.fromJson(order);
           listOrders.add(newOrder);
         }
 
@@ -198,7 +198,7 @@ class _MyOrdersState extends State<MyOrders> {
             DateTime.now().hour,
             DateTime.now().minute+1);
 
-        constListOrders = listOrders;
+        globalListOrders = listOrders;
 
         // Отладка :)
         debugPrint('Успешно! Загружено: '+listOrders.length.toString() +' значений');
@@ -243,9 +243,22 @@ class _MyOrdersState extends State<MyOrders> {
             color: greyColor,
             size: 60.0,
           ),
+          heightSpace,
           Text(
-            'Замовлень немає',
+            'Список замовлень порожній',
             style: greyColor14MediumTextStyle,
+          ),
+          heightSpace,
+          heightSpace,
+          heightSpace,
+          SizedBox(
+            width: 300,
+            height: 100,
+            child: Text(
+              'Для створення замовлення скористайтеся каталогом товарів та послуг.',
+              style: greyColor12MediumTextStyle,
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

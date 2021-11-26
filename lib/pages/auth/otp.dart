@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:tehnotop/pages/screen.dart';
+import 'package:tehnotop/constants/screens.dart';
 
 class Otp extends StatefulWidget {
   final String phoneNumber;
