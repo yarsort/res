@@ -214,6 +214,12 @@ TextStyle whiteColor15BoldTextStyle = TextStyle(
   fontWeight: FontWeight.w700,
 );
 
+TextStyle whiteColor17BoldTextStyle = TextStyle(
+  color: whiteColor,
+  fontSize: 17,
+  fontWeight: FontWeight.w700,
+);
+
 TextStyle darkBlueColor15SemiBoldTextStyle = TextStyle(
   color: darkBlueColor,
   fontSize: 15,

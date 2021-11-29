@@ -154,14 +154,14 @@ class AllStore extends StatelessWidget {
                               callDialog(context, item);
                           },
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   item['phoneNumber'],
                                   style: darkBlueColor12MediumTextStyle,
                                 ),
-                                widthSpace,
                                 Text(
-                                  'Подзвонити',
+                                  'Зателефонувати',
                                   style: greyColor12MediumTextStyle,
                                 ),
 

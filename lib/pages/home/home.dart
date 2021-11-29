@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -27,8 +26,8 @@ class _HomeState extends State<Home> {
   double width;
 
   final offerList = [
-    {'image': 'assets/offer_banner/Offer1.png'},
-    {'image': 'assets/offer_banner/Offer2.png'},
+    {'image': 'assets/offer_banner/app-ban001.png'},
+    {'image': 'assets/offer_banner/app-ban002.png'},
   ];
 
   final storeList = [];
@@ -70,8 +69,31 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 0,
-        backgroundColor: bgColor,
+        toolbarHeight: 40,
+        title: Text('ТЕХНОТОП',
+          style: whiteColor17BoldTextStyle,
+        ),
+        backgroundColor: primaryColor, // status bar color
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: whiteColor, size: 25,),
+          tooltip: 'Головна',
+          onPressed: () {
+            currentIndex = 3;
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BottomBar()),
+            );
+          },
+        ),
+        actions: [
+          /*IconButton(
+            icon: const Icon(Icons.shopping_cart, color: whiteColor),
+            tooltip: 'Кошик',
+            onPressed: () {
+
+            },
+          ),*/
+        ],
       ),
       body: RefreshIndicator(
         color: primaryColor,
@@ -392,6 +414,8 @@ class _HomeState extends State<Home> {
             Container(
               margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
               child: BarcodeWidget(
+                drawText: false,
+                color: darkBlueColor,
                 barcode: Barcode.ean13(), // Barcode type and settings
                 data: constBarcodeUser, // Content
                 width: width * 0.75,
@@ -421,14 +445,14 @@ class _HomeState extends State<Home> {
                   : fixPadding * 1.5,
             ),
             child: InkWell(
-              onTap: () => Navigator.push(
+              /*onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ParticularItem(
                     tag: offerList[index],
                   ),
                 ),
-              ),
+              ),*/
               child: Container(
                 margin: EdgeInsets.symmetric(vertical: 5.0),
                 height: height * 0.10,
@@ -671,14 +695,14 @@ class _HomeState extends State<Home> {
                             callDialog(context, item);
                           },
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 item['phoneNumber'],
                                 style: darkBlueColor12MediumTextStyle,
                               ),
-                              widthSpace,
                               Text(
-                                'Подзвонити',
+                                'Зателефонувати',
                                 style: greyColor12MediumTextStyle,
                               ),
 
