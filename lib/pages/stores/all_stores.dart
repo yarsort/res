@@ -1,4 +1,5 @@
 import 'package:tehnotop/constants/screens.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AllStore extends StatelessWidget {
 
@@ -227,6 +228,12 @@ class AllStore extends StatelessWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () async {
+                              final Uri launchUri = Uri(
+                                scheme: 'tel',
+                                path: tel,
+                              );
+                              await launch(launchUri.toString());
+
                               // await FlutterPhoneDirectCaller.callNumber(tel);
                               Navigator.pop(context);
                             },

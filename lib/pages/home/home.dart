@@ -6,6 +6,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -498,7 +499,11 @@ class _HomeState extends State<Home> {
                         Expanded(
                           child: InkWell(
                             onTap: () async {
-                              //await FlutterPhoneDirectCaller.callNumber(tel);
+                              final Uri launchUri = Uri(
+                                scheme: 'tel',
+                                path: tel,
+                              );
+                              await launch(launchUri.toString());
                               Navigator.pop(context);
                             },
                             child: Container(
