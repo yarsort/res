@@ -5,7 +5,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
-    runApp(MyApp());
+    runApp(
+        MyApp());
   });
 }
 
@@ -21,10 +22,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
         fontFamily: 'ACDisplay',
         appBarTheme: AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: primaryColor
-          ),
-          iconTheme: IconThemeData(color: darkBlueColor),
+          iconTheme: IconThemeData(
+            color: darkBlueColor),
           elevation: 0.0,
           color: bgColor
         ),
