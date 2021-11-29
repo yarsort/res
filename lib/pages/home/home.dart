@@ -81,9 +81,8 @@ class _HomeState extends State<Home> {
         child: ListView(
           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: [
-            title('Програма лояльності'),
+            titleFirst('Програма лояльності'),
             bonusListView(),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -333,6 +332,21 @@ class _HomeState extends State<Home> {
             );
           }
         },
+      ),
+    );
+  }
+
+  titleFirst(String title) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        fixPadding * 2.0,
+        fixPadding * 2.0,
+        fixPadding * 2.0,
+        fixPadding * 2.0,
+      ),
+      child: Text(
+        title,
+        style: darkBlueColor17SemiBoldTextStyle,
       ),
     );
   }
