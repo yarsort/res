@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:tehnotop/constants/screens.dart';
 import 'package:tehnotop/widget/column_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -153,15 +152,7 @@ class _HomeState extends State<Home> {
   _readSettings() async {
     SharedPreferences prefs = await _prefs;
     constPhoneNumber = (prefs.getString('settings_phoneUser') ?? '');
-    constAvatarUserPath = prefs.getString('settings_avatarUser');
     constNameUser = prefs.getString('settings_nameUser');
-
-    if (constAvatarUserPath == '') {
-      constAvatarUserPath = prefs.getString('settings_avatarUser');
-      constImageAvatar = File(constAvatarUserPath ?? null);
-    }else{
-      constImageAvatar = File(constAvatarUserPath);
-    }
   }
 
   _loadData() async {
@@ -507,7 +498,7 @@ class _HomeState extends State<Home> {
                         Expanded(
                           child: InkWell(
                             onTap: () async {
-                              await FlutterPhoneDirectCaller.callNumber(tel);
+                              //await FlutterPhoneDirectCaller.callNumber(tel);
                               Navigator.pop(context);
                             },
                             child: Container(

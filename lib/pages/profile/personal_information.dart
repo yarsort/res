@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tehnotop/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -183,31 +182,31 @@ class _PersonalInformationState extends State<PersonalInformation> {
                     InkWell(
                       onTap: () async {
 
-                        final picker = ImagePicker();
-                        Directory directory = await getApplicationDocumentsDirectory();
-
-                        String path = directory.path;
-
-                        if (path == '') {
-                          throw MissingPlatformDirectoryException(
-                              'Доступ до каталогу програми заборонено!');
-                        }
-
-                        final XFile pickedImage = await picker.pickImage(source: ImageSource.camera);
-
-                        if (pickedImage == null) return;
-
-                        File tmpFile = File(pickedImage.path);
-                        tmpFile = await tmpFile.copy('$path/avatar.jpg');
-
-                        final SharedPreferences prefs = await _prefs;
-                        prefs.setString("settings_avatarUser", tmpFile.path);
-
-                        constAvatarUserPath = tmpFile.path;
-
-                        setState(() {
-                          image = tmpFile;
-                        });
+                        // final picker = ImagePicker();
+                        // Directory directory = await getApplicationDocumentsDirectory();
+                        //
+                        // String path = directory.path;
+                        //
+                        // if (path == '') {
+                        //   throw MissingPlatformDirectoryException(
+                        //       'Доступ до каталогу програми заборонено!');
+                        // }
+                        //
+                        // final XFile pickedImage = await picker.pickImage(source: ImageSource.camera);
+                        //
+                        // if (pickedImage == null) return;
+                        //
+                        // File tmpFile = File(pickedImage.path);
+                        // tmpFile = await tmpFile.copy('$path/avatar.jpg');
+                        //
+                        // final SharedPreferences prefs = await _prefs;
+                        // prefs.setString("settings_avatarUser", tmpFile.path);
+                        //
+                        // constAvatarUserPath = tmpFile.path;
+                        //
+                        // setState(() {
+                        //   image = tmpFile;
+                        // });
 
                         Navigator.pop(context);
                       },
@@ -234,24 +233,24 @@ class _PersonalInformationState extends State<PersonalInformation> {
                     ),
                     InkWell(
                       onTap: () async {
-                        final picker = ImagePicker();
-                        final Directory path = await getApplicationDocumentsDirectory();
-
-                        if (path == null) {
-                          throw MissingPlatformDirectoryException(
-                              'Доступ до каталогу програми заборонено!');
-                        }
-
-                        final XFile pickedImage = await picker.pickImage(source: ImageSource.gallery);
-
-                        if (pickedImage == null) return;
-
-                        File tmpFile = File(pickedImage.path);
-                        tmpFile = await tmpFile.copy('$path/avatar.png');
-
-                        setState(() {
-                          image = tmpFile;
-                        });
+                        // final picker = ImagePicker();
+                        // final Directory path = await getApplicationDocumentsDirectory();
+                        //
+                        // if (path == null) {
+                        //   throw MissingPlatformDirectoryException(
+                        //       'Доступ до каталогу програми заборонено!');
+                        // }
+                        //
+                        // final XFile pickedImage = await picker.pickImage(source: ImageSource.gallery);
+                        //
+                        // if (pickedImage == null) return;
+                        //
+                        // File tmpFile = File(pickedImage.path);
+                        // tmpFile = await tmpFile.copy('$path/avatar.png');
+                        //
+                        // setState(() {
+                        //   image = tmpFile;
+                        // });
                       },
                       child: Container(
                         padding: EdgeInsets.all(10.0),

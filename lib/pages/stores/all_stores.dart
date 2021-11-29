@@ -1,5 +1,4 @@
 import 'package:tehnotop/constants/screens.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 class AllStore extends StatelessWidget {
 
@@ -228,7 +227,7 @@ class AllStore extends StatelessWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () async {
-                              await FlutterPhoneDirectCaller.callNumber(tel);
+                              // await FlutterPhoneDirectCaller.callNumber(tel);
                               Navigator.pop(context);
                             },
                             child: Container(

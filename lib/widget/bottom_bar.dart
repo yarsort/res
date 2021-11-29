@@ -12,6 +12,7 @@ class BottomBar extends StatefulWidget {
 int currentIndex = 0;
 
 class _BottomBarState extends State<BottomBar> {
+  var heightBotoomBar = 0;
   DateTime currentBackPressTime;
   @override
   Widget build(BuildContext context) {
@@ -40,10 +41,10 @@ class _BottomBarState extends State<BottomBar> {
                     : Profile(),
       ),
       bottomNavigationBar: Container(
-        height: 60,
+        height: 90,
         child: BottomNavyBar(
           showElevation: true,
-          containerHeight: 20,
+          containerHeight: 50,
           selectedIndex: currentIndex,
           onItemSelected: (index) {
             setState(() {
@@ -52,8 +53,9 @@ class _BottomBarState extends State<BottomBar> {
           },
           items: [
             BottomNavyBarItem(
+
               icon: Icon(Icons.home,
-                size: 25,
+                size: 30,
                 color: currentIndex == 0 ? primaryColor : darkBlueColor,
               ),
               title: Text(
@@ -64,7 +66,7 @@ class _BottomBarState extends State<BottomBar> {
             ),
             BottomNavyBarItem(
               icon: Icon(Icons.list_alt,
-                size: 25,
+                size: 30,
                 color: currentIndex == 1 ? primaryColor : darkBlueColor,
               ),
               title: Text(
@@ -75,7 +77,7 @@ class _BottomBarState extends State<BottomBar> {
             ),
             BottomNavyBarItem(
               icon: Icon(Icons.store,
-                size: 27,
+                size: 30,
                 color: currentIndex == 2 ? primaryColor : darkBlueColor,
               ),
               title: Text(
@@ -86,7 +88,7 @@ class _BottomBarState extends State<BottomBar> {
             ),
             BottomNavyBarItem(
               icon: Icon(Icons.account_circle,
-                size: 25,
+                size: 30,
                 color: currentIndex == 3 ? primaryColor : darkBlueColor,
               ),
               title: Text(
