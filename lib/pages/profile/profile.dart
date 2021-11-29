@@ -35,15 +35,14 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: primaryColor, // status bar color
         automaticallyImplyLeading: false,
-        title: Text(
-          'Профіль',
-          style: darkBlueColor18SemiBoldTextStyle,
-        ),
       ),
       body: ListView(
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         children: [
+          title('Профіль'),
           userDetails(),
           profileDetails(
             child: Column(
@@ -324,6 +323,21 @@ class _ProfileState extends State<Profile> {
       prefs.setString("settings_phoneUser", '');
       prefs.setString("settings_emailUser", '');
     });
+  }
+
+  title(String title) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        fixPadding * 2.0,
+        fixPadding * 2.0,
+        fixPadding * 2.0,
+        fixPadding,
+      ),
+      child: Text(
+        title,
+        style: darkBlueColor17SemiBoldTextStyle,
+      ),
+    );
   }
 
   logoutDialog() {

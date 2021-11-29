@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: bgColor,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
         fontFamily: 'ACDisplay',
         appBarTheme: AppBarTheme(
           iconTheme: IconThemeData(color: darkBlueColor),

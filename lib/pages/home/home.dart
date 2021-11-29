@@ -68,6 +68,10 @@ class _HomeState extends State<Home> {
     width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        backgroundColor: primaryColor, // status bar color
+      ),
       body: RefreshIndicator(
         color: primaryColor,
         onRefresh: () async {
