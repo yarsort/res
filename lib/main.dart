@@ -21,9 +21,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
         fontFamily: 'ACDisplay',
         appBarTheme: AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: primaryColor
+          ),
           iconTheme: IconThemeData(color: darkBlueColor),
           elevation: 0.0,
-          color: Colors.transparent,
+          color: bgColor
         ),
       ),
       home: SplashScreen(),
