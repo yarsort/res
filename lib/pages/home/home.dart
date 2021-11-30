@@ -70,12 +70,13 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
+        titleSpacing: 0.0,
         centerTitle: true,
+        backgroundColor: primaryColor,
         title: Text('ТЕХНОТОП',
-          style: whiteColor17BoldTextStyle,
+          style: whiteColor15SemiBoldTextStyle,
           textAlign: TextAlign.center,
         ),
-        backgroundColor: primaryColor, // status bar color
         leading: IconButton(
           icon: const Icon(Icons.menu, color: whiteColor, size: 25,),
           tooltip: 'Головна',
@@ -111,7 +112,7 @@ class _HomeState extends State<Home> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                title('Діючі акції'),
+                title('Пропозиції'),
               ],
             ),
             offersListView(),

@@ -42,14 +42,17 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor,),
         ),
         title: Text(
           'Налаштування',
-          style: darkBlueColor17SemiBoldTextStyle,
+          style: whiteColor15SemiBoldTextStyle,
         ),
       ),
       body: ListView(

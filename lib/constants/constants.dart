@@ -100,12 +100,6 @@ TextStyle primaryColor22SemiBoldTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
-TextStyle whiteColor20BoldTextStyle = TextStyle(
-  color: whiteColor,
-  fontSize: 20,
-  fontWeight: FontWeight.w700,
-);
-
 TextStyle darkBlueColor20BoldTextStyle = TextStyle(
   color: darkBlueColor,
   fontSize: 20,
@@ -116,12 +110,6 @@ TextStyle darkBlueColor20SemiBoldTextStyle = TextStyle(
   color: darkBlueColor,
   fontSize: 20,
   fontWeight: FontWeight.w600,
-);
-
-TextStyle whiteColor18BoldTextStyle = TextStyle(
-  color: whiteColor,
-  fontSize: 18,
-  fontWeight: FontWeight.bold,
 );
 
 TextStyle darkBlueColor18SemiBoldTextStyle = TextStyle(
@@ -208,16 +196,40 @@ TextStyle greyColor15MediumTextStyle = TextStyle(
   fontWeight: FontWeight.w500,
 );
 
-TextStyle whiteColor15BoldTextStyle = TextStyle(
+TextStyle whiteColor20BoldTextStyle = TextStyle(
   color: whiteColor,
-  fontSize: 15,
+  fontSize: 20,
   fontWeight: FontWeight.w700,
+);
+
+TextStyle whiteColor18BoldTextStyle = TextStyle(
+  color: whiteColor,
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
 );
 
 TextStyle whiteColor17BoldTextStyle = TextStyle(
   color: whiteColor,
   fontSize: 17,
   fontWeight: FontWeight.w700,
+);
+
+TextStyle whiteColor15SemiBoldTextStyle = TextStyle(
+  color: whiteColor,
+  fontSize: 15,
+  fontWeight: FontWeight.w600,
+);
+
+TextStyle whiteColor15BoldTextStyle = TextStyle(
+  color: whiteColor,
+  fontSize: 15,
+  fontWeight: FontWeight.w700,
+);
+
+TextStyle whiteColorColor15MediumTextStyle = TextStyle(
+  color: whiteColor,
+  fontSize: 15,
+  fontWeight: FontWeight.w600,
 );
 
 TextStyle darkBlueColor15SemiBoldTextStyle = TextStyle(

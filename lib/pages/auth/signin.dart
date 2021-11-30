@@ -158,18 +158,22 @@ class _SignInState extends State<SignIn> {
     final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leading: Row(
-          children: [
-            IconButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SplashScreen()),
-              ),
-              icon: Icon(Icons.arrow_back_ios),
-            ),
-          ],
+        toolbarHeight: 40,
+        titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text('Авторизація',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
+        leading: IconButton(
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SplashScreen()),
+          ),
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor),
         ),
       ),
       body: SizedBox(
@@ -177,22 +181,19 @@ class _SignInState extends State<SignIn> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              heightSpace,
+              heightSpace,
+              heightSpace,
+              heightSpace,
+              heightSpace,
+              heightSpace,
               cornerLogo(),
               heightSpace,
               heightSpace,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(fixPadding * 2.0, fixPadding,
-                        fixPadding * 2.0, fixPadding * 2.0),
-                    child: Text(
-                      'Авторизація',
-                      style: darkBlueColor22BoldTextStyle,
-                    ),
-                  ),
-                ],
-              ),
+              heightSpace,
+              heightSpace,
+              heightSpace,
+              heightSpace,
               userNameTextField(),
               Text(
                 ' * Вкажіть Ваш номер телефону в повному форматі',
@@ -312,7 +313,7 @@ class _SignInState extends State<SignIn> {
             ],
           ),
           child: Text(
-            'Увійти',
+            'Відправити СМС',
             style: whiteColor20BoldTextStyle,
           ),
         ),

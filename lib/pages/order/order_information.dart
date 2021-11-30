@@ -74,24 +74,22 @@ class _OrderItemsInformationState extends State<OrderItemsInformation> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Деталі замовлення ',
-          style: darkBlueColor18SemiBoldTextStyle,
+        toolbarHeight: 40,
+        titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text('Деталі замовлення',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.update),
-            tooltip: 'Оновити',
-            onPressed: () {
-              _loadData();
-            },
-          ),
-        ],
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor,),
+        ),
       ),
       body: _loading ? bodyProgress : body,
-      bottomNavigationBar: closeOrderButton(context));
-
+      bottomNavigationBar: closeOrderButton(context)
+    );
   }
 
   shortDateToString(DateTime date) {

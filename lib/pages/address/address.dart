@@ -28,14 +28,17 @@ class _AddressState extends State<Address> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text('Адреси доставки',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-        title: Text(
-          'Адреси доставки',
-          style: darkBlueColor17SemiBoldTextStyle,
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor,),
         ),
       ),
       body: ListView(

@@ -43,8 +43,10 @@ android {
         applicationId "ua.com.yarsort.tehnotop"
         minSdkVersion 20
         targetSdkVersion 30
-        versionCode 1
-        versionName '1.0'
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+
+        multiDexEnabled true
     }
 
     signingConfigs {

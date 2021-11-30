@@ -49,7 +49,7 @@ class _MyOrdersState extends State<MyOrders> {
     var body = ListView(
       physics: BouncingScrollPhysics(),
       children: [
-        title('Замовлення'),
+        heightSpace,
         Text(
           'Останнє оновлення списку: ${fullDateToString(dateLastUpdatingOrders)}',
           style: greyColor10MediumTextStyle,
@@ -61,9 +61,15 @@ class _MyOrdersState extends State<MyOrders> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 0,
-        backgroundColor: primaryColor, // status bar color
+        toolbarHeight: 40,
+        titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
+        title: Text('Замовлення',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
       ),
       body: RefreshIndicator(
         color: primaryColor,

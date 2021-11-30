@@ -36,9 +36,20 @@ class _OtpState extends State<Otp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
+        titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text('Підтвердження телефону',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SplashScreen()),
+          ),
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor),
         ),
       ),
       body: Stack(
@@ -53,11 +64,6 @@ class _OtpState extends State<Otp> {
                   children: [
                     heightSpace,
                     heightSpace,
-                    Text(
-                      'Підтвердження Вашого телефону',
-                      textAlign: TextAlign.center,
-                      style: darkBlueColor22BoldTextStyle,
-                    ),
                     heightSpace,
                     heightSpace,
                     heightSpace,

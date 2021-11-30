@@ -51,14 +51,18 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        automaticallyImplyLeading: false,
+        title: Text('Нагадування',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-        title: Text(
-          'Нагадування',
-          style: darkBlueColor18SemiBoldTextStyle,
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor,),
         ),
       ),
       body: notificationList.length == 0

@@ -35,15 +35,24 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 0,
-        backgroundColor: primaryColor, // status bar color
+        toolbarHeight: 40,
+        titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
+        title: Text('Профіль',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
       ),
       body: ListView(
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         children: [
-          title('Профіль'),
+          heightSpace,
+          heightSpace,
+          heightSpace,
           userDetails(),
+          heightSpace,
           profileDetails(
             child: Column(
               children: [
@@ -202,7 +211,7 @@ class _ProfileState extends State<Profile> {
         fixPadding * 2.0,
         fixPadding,
         fixPadding * 2.0,
-        fixPadding * 2.0,
+        fixPadding,
       ),
       child: InkWell(
         onTap: () =>

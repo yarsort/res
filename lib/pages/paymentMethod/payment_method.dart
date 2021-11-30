@@ -40,14 +40,17 @@ class _PaymentMethodState extends State<PaymentMethod> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
         titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text('Доступні способи оплат',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios),
-        ),
-        title: Text(
-          'Доступні способи оплат',
-          style: darkBlueColor17SemiBoldTextStyle,
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor,),
         ),
       ),
       body: ListView(

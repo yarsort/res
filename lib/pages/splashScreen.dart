@@ -23,13 +23,13 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/bg.png'),
+          image: AssetImage('assets/main-bg.png'),
           fit: BoxFit.cover,
         ),
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: blackColor.withOpacity(0.4),
+          //color: blackColor.withOpacity(0.4),
         ),
         child: WillPopScope(
           onWillPop: () async {
@@ -42,12 +42,17 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(height: 80),
-                cornerLogo(),
+                //SizedBox(height: 80),
+                //cornerLogo(),
                 SizedBox(height: heightSizedBox),
-                signinButton(context),
-                signupButton(context),
+                Column(
+                  children: [
+                    signupButton(context),
+                    signinButton(context),
+                  ],
+                )
               ],
             ),
           ),
@@ -123,12 +128,19 @@ class _SplashScreenState extends State<SplashScreen> {
           height: 50,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: whiteColor,
+            color: primaryColor,
             borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: primaryColor.withOpacity(0.2),
+                spreadRadius: 2.5,
+                blurRadius: 2.5,
+              ),
+            ],
           ),
           child: Text(
             'Увійти',
-            style: darkBlueColor20BoldTextStyle,
+            style: whiteColor20BoldTextStyle,
           ),
         ),
       ),
@@ -151,19 +163,12 @@ class _SplashScreenState extends State<SplashScreen> {
           height: 50,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: primaryColor,
+            color: whiteColor,
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                color: primaryColor.withOpacity(0.2),
-                spreadRadius: 2.5,
-                blurRadius: 2.5,
-              ),
-            ],
           ),
           child: Text(
             'Реєстрація',
-            style: whiteColor20BoldTextStyle,
+            style: darkBlueColor20BoldTextStyle,
           ),
         ),
       ),

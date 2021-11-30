@@ -171,9 +171,20 @@ class _SignUpState extends State<SignUp> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 40,
+        titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text('Реєстрація',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SplashScreen()),
+          ),
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor),
         ),
       ),
       body: SizedBox(
@@ -181,23 +192,19 @@ class _SignUpState extends State<SignUp> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              heightSpace,
+              heightSpace,
+              heightSpace,
+              heightSpace,
+              heightSpace,
+              heightSpace,
               cornerLogo(),
               heightSpace,
               heightSpace,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                        fixPadding * 2.0, fixPadding,
-                        fixPadding * 2.0, fixPadding * 2.0),
-                    child: Text(
-                      'Реєстрація покупця',
-                      style: darkBlueColor22BoldTextStyle,
-                    ),
-                  ),
-                ],
-              ),
+              heightSpace,
+              heightSpace,
+              heightSpace,
+              heightSpace,
               userNameTextField(),
               phoneNumberTextField(),
               emailTextField(),

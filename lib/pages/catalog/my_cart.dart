@@ -46,11 +46,17 @@ class _MyCartState extends State<MyCart> {
 
     return Scaffold(
       appBar: AppBar(
-        //automaticallyImplyLeading: false,
+        toolbarHeight: 40,
         titleSpacing: 0.0,
-        title: Text(
-          'Кошик',
-          style: darkBlueColor18SemiBoldTextStyle,
+        centerTitle: true,
+        backgroundColor: primaryColor,
+        title: Text('Кошик',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(Icons.arrow_back_ios, color: whiteColor,),
         ),
       ),
       body: globalListItemsBasket.length == 0

@@ -14,13 +14,19 @@ class AllStore extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 0,
-        backgroundColor: primaryColor, // status bar color
+        toolbarHeight: 40,
+        titleSpacing: 0.0,
+        centerTitle: true,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
+        title: Text('Магазини',
+          style: whiteColor15SemiBoldTextStyle,
+          textAlign: TextAlign.center,
+        ),
       ),
       body: ListView(
         children: [
-          title('Магазини'),
+          heightSpace,
           storeListView(),
         ],
       ),
