@@ -24,7 +24,7 @@ class _PolicyState extends State<Policy> {
         ),
         title: Text(
           'Політика компанії',
-          style: darkBlueColor18SemiBoldTextStyle,
+          style: darkBlueColor17SemiBoldTextStyle,
         ),
       ),
       body: ListView(

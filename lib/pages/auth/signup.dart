@@ -65,7 +65,7 @@ class _SignUpState extends State<SignUp> {
     try {
       var rng = Random();
       codeSMS = rng.nextInt(9000) + 1000;
-      var startTime = 'AUTO';                                                  // отправить немедленно или ставим дату и время  в формате
+      var startTime = 'AUTO'; // отправить немедленно или ставим дату и время  в формате
       var endTime = 'AUTO';
       var lifetime = 12;
       var rate = 1;
@@ -84,7 +84,8 @@ class _SignUpState extends State<SignUp> {
       myXML = myXML + "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n";
       myXML = myXML + "<request>\r\n";
       myXML = myXML + "<operation>SENDSMS</operation>\r\n";
-      myXML = myXML + "	<message start_time=\"$startTime\" end_time=\"$endTime\" lifetime=\"$lifetime\" rate=\"$rate\" desc=\"$description\" source=\"$source\">\"\r\n";
+      myXML = myXML +
+          "	<message start_time=\"$startTime\" end_time=\"$endTime\" lifetime=\"$lifetime\" rate=\"$rate\" desc=\"$description\" source=\"$source\">\"\r\n";
       myXML = myXML + "	<body>$text</body>\r\n";
       myXML = myXML + "	<recipient>$recipient</recipient>\r\n";
       myXML = myXML + "</message>\r\n";
@@ -102,7 +103,6 @@ class _SignUpState extends State<SignUp> {
 
       // Если получили позитивный результат от сервера, то продолжим
       if (response.statusCode == 200) {
-
         var bodyResponse = response.body;
         if (bodyResponse.contains('state code="ACCEPT"')) {
           setState(() {
@@ -113,15 +113,13 @@ class _SignUpState extends State<SignUp> {
               behavior: SnackBarBehavior.floating,
               content: Text('СМС відправлено!'),
               duration: Duration(seconds: 3)));
-
-        }else{
+        } else {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               behavior: SnackBarBehavior.floating,
               content: Text('Не вірно сформовано СМС!'),
               duration: Duration(seconds: 3)));
         }
       } else {
-
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             behavior: SnackBarBehavior.floating,
             content: Text('Помилка відправки СМС! Сервіс недоступний!'),
@@ -134,9 +132,7 @@ class _SignUpState extends State<SignUp> {
 
         return false;
       }
-
     } catch (error) {
-
       // Отладка
       debugPrint(error.toString());
 
@@ -164,8 +160,14 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+    final double screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+    final double keyboardHeight = MediaQuery
+        .of(context)
+        .viewInsets
+        .bottom;
 
     return Scaffold(
       appBar: AppBar(
@@ -179,14 +181,15 @@ class _SignUpState extends State<SignUp> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              cornerImage(),
+              cornerLogo(),
               heightSpace,
               heightSpace,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(fixPadding * 2.0, fixPadding,
+                    padding: const EdgeInsets.fromLTRB(
+                        fixPadding * 2.0, fixPadding,
                         fixPadding * 2.0, fixPadding * 2.0),
                     child: Text(
                       'Реєстрація покупця',
@@ -196,8 +199,9 @@ class _SignUpState extends State<SignUp> {
                 ],
               ),
               userNameTextField(),
-              emailTextField(),
               phoneNumberTextField(),
+              emailTextField(),
+
               const SizedBox(height: 200),
               //passwordTextField(),
               //Text('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n'),
@@ -258,98 +262,144 @@ class _SignUpState extends State<SignUp> {
   }
 
   emailTextField() {
-    return Container(
-      margin: EdgeInsets.fromLTRB(
-        fixPadding * 2.0,
-        fixPadding,
-        fixPadding * 2.0,
-        fixPadding,
-      ),
-      padding: EdgeInsets.all(fixPadding * 1.5),
-      decoration: BoxDecoration(
-        color: whiteColor,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: greyColor.withOpacity(0.1),
-            spreadRadius: 2.5,
-            blurRadius: 2.5,
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.fromLTRB(
+            fixPadding * 2.0,
+            fixPadding,
+            fixPadding * 2.0,
+            fixPadding,
           ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.email_outlined,
-            color: greyColor,
-            size: 20,
-          ),
-          widthSpace,
-          Expanded(
-            child: TextField(
-              cursorColor: primaryColor,
-              controller: emailController,
-              style: greyColor16MediumTextStyle,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
-                hintStyle: greyColor16MediumTextStyle,
-                hintText: 'Email',
-                border: UnderlineInputBorder(borderSide: BorderSide.none),
+          padding: EdgeInsets.all(fixPadding * 1.5),
+          decoration: BoxDecoration(
+            color: whiteColor,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: greyColor.withOpacity(0.1),
+                spreadRadius: 2.5,
+                blurRadius: 2.5,
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.email_outlined,
+                color: greyColor,
+                size: 20,
+              ),
+              widthSpace,
+              Expanded(
+                child: TextField(
+                  cursorColor: primaryColor,
+                  controller: emailController,
+                  style: greyColor16MediumTextStyle,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                    hintStyle: greyColor16MediumTextStyle,
+                    hintText: 'Email',
+                    border: UnderlineInputBorder(borderSide: BorderSide.none),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(
+            fixPadding * 2.0,
+            0,
+            fixPadding * 2.0,
+            fixPadding,
+          ),
+          child: Row(
+            children: [
+              Text('* Не обов\'язково',
+                  style: greyColor13RegularTextStyle,
+                  textAlign: TextAlign.start),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
   phoneNumberTextField() {
-    return Container(
-      margin: EdgeInsets.fromLTRB(
-        fixPadding * 2.0,
-        fixPadding,
-        fixPadding * 2.0,
-        fixPadding,
-      ),
-      padding: EdgeInsets.all(fixPadding * 1.5),
-      decoration: BoxDecoration(
-        color: whiteColor,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: greyColor.withOpacity(0.1),
-            spreadRadius: 2.5,
-            blurRadius: 2.5,
+    return Column(
+      children: [
+        Container(
+          margin: EdgeInsets.fromLTRB(
+            fixPadding * 2.0,
+            fixPadding,
+            fixPadding * 2.0,
+            fixPadding * 2.0,
           ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.phone_android_outlined,
-            color: greyColor,
-            size: 20,
-          ),
-          widthSpace,
-          Expanded(
-            child: TextField(
-              cursorColor: primaryColor,
-              controller: phoneNumberController,
-              style: greyColor16MediumTextStyle,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
-                hintStyle: greyColor16MediumTextStyle,
-                hintText: 'Номер телефону',
-                border: UnderlineInputBorder(borderSide: BorderSide.none),
+          padding: EdgeInsets.all(fixPadding * 1.5),
+          decoration: BoxDecoration(
+            color: whiteColor,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: greyColor.withOpacity(0.1),
+                spreadRadius: 2.5,
+                blurRadius: 2.5,
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.phone_android_outlined,
+                color: greyColor,
+                size: 20,
+              ),
+              Text('+38', style:greyColor16MediumTextStyle),
+              widthSpace,
+              Expanded(
+                child: TextField(
+                  cursorColor: primaryColor,
+                  controller: phoneNumberController,
+                  style: greyColor16MediumTextStyle,
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                    hintStyle: greyColor16MediumTextStyle,
+                    hintText: 'Номер телефону',
+                    border: UnderlineInputBorder(borderSide: BorderSide.none),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.fromLTRB(
+            fixPadding * 2.0,
+            0,
+            fixPadding * 2.0,
+            fixPadding,
+          ),
+          child: Column(
+            children: [
+              Text(
+                ' * Вкажіть Ваш номер телефону в повному форматі',
+                style: greyColor13RegularTextStyle,
+                textAlign: TextAlign.start,
+              ),
+              Text(
+                '  Наприклад, 0982223344',
+                style: greyColor13RegularTextStyle,
+                textAlign: TextAlign.start,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -432,7 +482,7 @@ class _SignUpState extends State<SignUp> {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        Otp(phoneNumber,codeSMS.toString())));
+                        Otp(phoneNumber, codeSMS.toString())));
           }
         },
         child: Container(
@@ -467,12 +517,17 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  cornerImage() {
-    return Image.asset(
-      'assets/logo.png',
-      height: 100.0,
-      width: 100.0,
-      fit: BoxFit.none,
+  cornerLogo() {
+    return CircleAvatar(
+      radius: 58,
+      child: ClipOval(
+        child: Image.asset(
+          'assets/logo.png',
+          fit: BoxFit.contain,
+          height: 114,
+          width: 114,
+        ),
+      ),
     );
   }
 }

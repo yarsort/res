@@ -49,7 +49,7 @@ class _SettingsState extends State<Settings> {
         ),
         title: Text(
           'Налаштування',
-          style: darkBlueColor18SemiBoldTextStyle,
+          style: darkBlueColor17SemiBoldTextStyle,
         ),
       ),
       body: ListView(

@@ -39,7 +39,7 @@ class _DeliveryMethodState extends State<DeliveryMethod> {
         ),
         title: Text(
           'Доступні способи доставки',
-          style: darkBlueColor18SemiBoldTextStyle,
+          style: darkBlueColor17SemiBoldTextStyle,
         ),
       ),
       body: ListView(

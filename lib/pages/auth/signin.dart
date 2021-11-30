@@ -177,7 +177,7 @@ class _SignInState extends State<SignIn> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              cornerImage(),
+              cornerLogo(),
               heightSpace,
               heightSpace,
               Row(
@@ -195,22 +195,20 @@ class _SignInState extends State<SignIn> {
               ),
               userNameTextField(),
               Text(
-                'Вкажіть Ваш номер телефону в повному форматі',
+                ' * Вкажіть Ваш номер телефону в повному форматі',
                 style: greyColor13RegularTextStyle,
                 textAlign: TextAlign.center,
               ),
               Text(
-                'Наприклад, 0982223344',
+                '  Наприклад, 0982223344',
                 style: greyColor13RegularTextStyle,
                 textAlign: TextAlign.center,
               ),
-              signinButton(),
-              const SizedBox(height: 200),
             ],
           ),
         ),
       ),
-      //bottomNavigationBar: signinButton(),
+      bottomNavigationBar: signinButton(),
     );
   }
 
@@ -272,6 +270,24 @@ class _SignInState extends State<SignIn> {
       child: InkWell(
         borderRadius: BorderRadius.circular(10.0),
         onTap: () async {
+          final c = <String>[];
+          if(phoneNumberController.text.length < 10) c.add('Номер занадто короткий. \nПовинен мати не менше 10 символів.');
+          if(phoneNumberController.text.length > 12) c.add('Номер занадто довгий. \nПовинен мати не більше 12 символів.');
+
+          String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+          RegExp regExp = RegExp(pattern);
+          if (!regExp.hasMatch(phoneNumberController.text)) {
+            c.add('Номер вказано не вірно.');
+          }
+
+          if (c.length != 0) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(c.join('\n')),
+            duration: const Duration(seconds: 2)));
+            return;
+          }
+
           await _saveSettings();
           if (await _sendSMS() == true) {
             Navigator.push(
@@ -313,12 +329,17 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  cornerImage() {
-    return Image.asset(
-      'assets/logo.png',
-      height: 114.0,
-      width: 114.0,
-      fit: BoxFit.none,
+  cornerLogo() {
+    return CircleAvatar(
+      radius: 58,
+      child: ClipOval(
+        child: Image.asset(
+          'assets/logo.png',
+          fit: BoxFit.contain,
+          height: 114,
+          width: 114,
+        ),
+      ),
     );
   }
 }

@@ -82,15 +82,6 @@ class _OtpState extends State<Otp> {
                     heightSpace,
                     heightSpace,
                     codeTextField(),
-                    heightSpace,
-                    heightSpace,
-                    heightSpace,
-                    heightSpace,
-                    heightSpace,
-                    heightSpace,
-                    heightSpace,
-                    heightSpace,
-                    verifyButton(),
                   ],
                 ),
               ),
@@ -98,6 +89,7 @@ class _OtpState extends State<Otp> {
           ),
         ],
       ),
+      bottomNavigationBar: verifyButton(),
     );
   }
 
@@ -302,26 +294,32 @@ class _OtpState extends State<Otp> {
   }
 
   verifyButton() {
-    return InkWell(
-      borderRadius: BorderRadius.circular(10.0),
-      onTap: () => waitDialog(),
-      child: Container(
-        height: 50,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: primaryColor,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            BoxShadow(
-              color: primaryColor.withOpacity(0.2),
-              spreadRadius: 2.5,
-              blurRadius: 2.5,
-            ),
-          ],
-        ),
-        child: Text(
-          'Перевірити код',
-          style: whiteColor20BoldTextStyle,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: fixPadding * 2.0,
+        vertical: fixPadding * 1.5,
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(10.0),
+        onTap: () => waitDialog(),
+        child: Container(
+          height: 50,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: primaryColor.withOpacity(0.2),
+                spreadRadius: 2.5,
+                blurRadius: 2.5,
+              ),
+            ],
+          ),
+          child: Text(
+            'Перевірити код',
+            style: whiteColor20BoldTextStyle,
+          ),
         ),
       ),
     );

@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
             body: Column(
               children: [
                 SizedBox(height: 80),
-                logo(),
+                cornerLogo(),
                 SizedBox(height: heightSizedBox),
                 signinButton(context),
                 signupButton(context),
@@ -69,6 +69,20 @@ class _SplashScreenState extends State<SplashScreen> {
       return false;
     }
     return true;
+  }
+
+  cornerLogo() {
+    return CircleAvatar(
+      radius: 58,
+      child: ClipOval(
+        child: Image.asset(
+          'assets/logo.png',
+          fit: BoxFit.contain,
+          height: 114,
+          width: 114,
+        ),
+      ),
+    );
   }
 
   logo() {

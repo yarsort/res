@@ -21,32 +21,7 @@ class _MyCartState extends State<MyCart> {
     super.initState();
 
     globalListItemsBasket.clear();
-
-    if (globalListItemsBasket.isEmpty) {
-      //Для тестирования заказов
-      var countOrder = 10;
-      var price = 14999.0;
-
-      while (countOrder != 0) {
-        // Запись в список заказов
-        Item tempItem = Item(
-            uuid: '2345234 234t 234 234 53',
-            code: countOrder.toString(),
-            article: 'UA23466',
-            name: 'Телевизор SAMSUNG UE55AU7100UXUA ' + countOrder.toString(),
-            price: price,
-            sum: (countOrder * price).toDouble(),
-            count: countOrder,
-            unit: 'шт',
-            image:
-                'https://randompicturegenerator.com/img/car-generator/g312a1db9dd11930ce7698981e6f1353258fa24ff7faae68e148ffdd4b16d18e958e78de6751cd7df595657572cb372c9_640.jpg',
-            sumBonus: 0.0);
-
-        globalListItemsBasket.add(tempItem);
-        countOrder--;
-      }
-    }
-
+    fillTestData();
     calculateTotal();
   }
 
@@ -71,7 +46,8 @@ class _MyCartState extends State<MyCart> {
 
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
+        titleSpacing: 0.0,
         title: Text(
           'Кошик',
           style: darkBlueColor18SemiBoldTextStyle,
@@ -81,6 +57,34 @@ class _MyCartState extends State<MyCart> {
           ? noCartList()
           : body,
     );
+  }
+
+  fillTestData() {
+    return;
+    if (globalListItemsBasket.isEmpty) {
+      //Для тестирования заказов
+      var countOrder = 10;
+      var price = 14999.0;
+
+      while (countOrder != 0) {
+        // Запись в список заказов
+        Item tempItem = Item(
+            uuid: '2345234 234t 234 234 53',
+            code: countOrder.toString(),
+            article: 'UA23466',
+            name: 'Телевизор SAMSUNG UE55AU7100UXUA ' + countOrder.toString(),
+            price: price,
+            sum: (countOrder * price).toDouble(),
+            count: countOrder,
+            unit: 'шт',
+            image:
+            'https://randompicturegenerator.com/img/car-generator/g312a1db9dd11930ce7698981e6f1353258fa24ff7faae68e148ffdd4b16d18e958e78de6751cd7df595657572cb372c9_640.jpg',
+            sumBonus: 0.0);
+
+        globalListItemsBasket.add(tempItem);
+        countOrder--;
+      }
+    }
   }
 
   calculateTotal() async {
@@ -325,7 +329,7 @@ class _MyCartState extends State<MyCart> {
             width: 300,
             height: 100,
             child: Text(
-              'Для наповнення кошика скористайтеся каталогом товарів та послуг.',
+              'Для наповнення кошика в майбутньому Ви зможете скористатись каталогом товарів та послуг.',
               style: greyColor12MediumTextStyle,
               textAlign: TextAlign.center,
             ),

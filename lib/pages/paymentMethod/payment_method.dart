@@ -47,7 +47,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
         ),
         title: Text(
           'Доступні способи оплат',
-          style: darkBlueColor18SemiBoldTextStyle,
+          style: darkBlueColor17SemiBoldTextStyle,
         ),
       ),
       body: ListView(

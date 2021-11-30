@@ -70,8 +70,10 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
+        centerTitle: true,
         title: Text('ТЕХНОТОП',
           style: whiteColor17BoldTextStyle,
+          textAlign: TextAlign.center,
         ),
         backgroundColor: primaryColor, // status bar color
         leading: IconButton(

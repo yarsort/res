@@ -35,7 +35,7 @@ class _AddressState extends State<Address> {
         ),
         title: Text(
           'Адреси доставки',
-          style: darkBlueColor18SemiBoldTextStyle,
+          style: darkBlueColor17SemiBoldTextStyle,
         ),
       ),
       body: ListView(

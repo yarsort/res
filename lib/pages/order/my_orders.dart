@@ -246,18 +246,6 @@ class _MyOrdersState extends State<MyOrders> {
             'Список замовлень порожній',
             style: greyColor14MediumTextStyle,
           ),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          SizedBox(
-            width: 300,
-            height: 100,
-            child: Text(
-              'Для створення замовлення скористайтеся каталогом товарів та послуг.',
-              style: greyColor12MediumTextStyle,
-              textAlign: TextAlign.center,
-            ),
-          ),
         ],
       ),
     );

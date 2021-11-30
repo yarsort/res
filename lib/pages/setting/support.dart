@@ -24,7 +24,7 @@ class _SupportState extends State<Support> {
         ),
         title: Text(
           'Підтримка',
-          style: darkBlueColor18SemiBoldTextStyle,
+          style: darkBlueColor17SemiBoldTextStyle,
         ),
       ),
       body: ListView(
