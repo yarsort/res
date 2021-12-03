@@ -27,7 +27,7 @@ export '../pages/address/address.dart';
 export '../pages/address/add_address.dart';
 export '../pages/address/select_address.dart';
 
-export '../pages/paymentMethod/select_payment_method.dart';
+export '../pages/other/select_payment_method.dart';
 
 export '../pages/order/order_done.dart';
 export '../pages/order/my_orders.dart';
@@ -38,10 +38,10 @@ export '../pages/chat/chat_screen.dart';
 export '../pages/profile/profile.dart';
 export '../pages/profile/personal_information.dart';
 
-export '../pages/paymentMethod/payment_method.dart';
-export '../pages/deliveryMethod/delivery_method.dart';
-export '../pages/paymentMethod/add_payment_method.dart';
-export '../pages/shareAndEarn/share_and_earn.dart';
+export '../pages/other/payment_method.dart';
+export '../pages/other/delivery_method.dart';
+export '../pages/other/add_payment_method.dart';
+export '../pages/other/share.dart';
 export '../pages/notification/notifications.dart';
 
 export '../pages/setting/settings.dart';
