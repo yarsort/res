@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tehnotop/constants/screens.dart';
 
 class Otp extends StatefulWidget {
@@ -13,6 +13,8 @@ class Otp extends StatefulWidget {
 }
 
 class _OtpState extends State<Otp> {
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   TextEditingController controller1;
   TextEditingController controller2;
   TextEditingController controller3;
@@ -68,6 +70,13 @@ class _OtpState extends State<Otp> {
                     heightSpace,
                     heightSpace,
                     heightSpace,
+                    cornerLogo(),
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
                     Text(
                       'Введіть код підтвердження',
                       textAlign: TextAlign.center,
@@ -97,6 +106,13 @@ class _OtpState extends State<Otp> {
       ),
       bottomNavigationBar: verifyButton(),
     );
+  }
+
+  _saveSettings() async {
+    final SharedPreferences prefs = await _prefs;
+    setState(() {
+      prefs.setString("settings_phoneUser", widget.phoneNumber);
+    });
   }
 
   codeTextField() {
@@ -213,7 +229,7 @@ class _OtpState extends State<Otp> {
                 FocusScope.of(context).requestFocus(thirdFocusNode);
                 return;
               }
-              waitDialog();
+              verifyCode();
             },
             controller: controller4,
             cursorColor: primaryColor,
@@ -228,6 +244,26 @@ class _OtpState extends State<Otp> {
         ),
       ],
     );
+  }
+
+  verifyCode() {
+    var typedText = controller1.text + controller2.text + controller3.text + controller4.text;
+
+    if (typedText.isEmpty) {
+      return;
+    }
+
+    if (widget.sentCode == typedText) {
+
+      _saveSettings(); // Запишем имя
+      waitDialog();
+
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text('Код введено не вірно!'),
+          duration: const Duration(seconds: 2)));
+    }
   }
 
   waitDialog() {
@@ -273,28 +309,13 @@ class _OtpState extends State<Otp> {
     Timer(
       Duration(seconds: 2),
       () {
+
         currentIndex = 0;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => BottomBar()),
         );
 
-        return;
-
-        var typedText = controller1.text + controller2.text + controller3.text + controller4.text;
-
-        if (widget.sentCode == typedText) {
-          currentIndex = 0;
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => BottomBar()),
-          );
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              behavior: SnackBarBehavior.floating,
-              content: Text('Код введено не вірно!'),
-              duration: const Duration(seconds: 2)));
-        }
       },
     );
   }
@@ -307,7 +328,9 @@ class _OtpState extends State<Otp> {
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(10.0),
-        onTap: () => waitDialog(),
+        onTap: () {
+            verifyCode();
+          },
         child: Container(
           height: 50,
           alignment: Alignment.center,
@@ -326,6 +349,20 @@ class _OtpState extends State<Otp> {
             'Перевірити код',
             style: whiteColor20BoldTextStyle,
           ),
+        ),
+      ),
+    );
+  }
+
+  cornerLogo() {
+    return CircleAvatar(
+      radius: 58,
+      child: ClipOval(
+        child: Image.asset(
+          'assets/logo.png',
+          fit: BoxFit.contain,
+          height: 114,
+          width: 114,
         ),
       ),
     );

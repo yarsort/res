@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tehnotop/constants/screens.dart';
@@ -9,12 +10,39 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool visible = false;
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   String phoneNumber;
 
   DateTime currentBackPressTime;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Splash screen или отображает кнопки регистрации или переводит на главный экран
+    Timer(
+      Duration(seconds: 2),
+        () async {
+          SharedPreferences prefs = await _prefs;
+          phoneNumber = (prefs.getString('settings_phoneUser') ?? '');
+
+          if (phoneNumber != '') {
+            currentIndex = 0;
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => BottomBar()),
+            );
+          } else {
+            setState(() {
+              visible = true;
+            });
+          }
+        }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,47 +128,50 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   signinButton(context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: fixPadding * 2.0,
-        vertical: fixPadding,
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(10.0),
-        onTap: () async {
-          SharedPreferences prefs = await _prefs;
-          phoneNumber = (prefs.getString('settings_phoneUser') ?? '');
+    return Visibility(
+      visible: visible,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: fixPadding * 2.0,
+          vertical: fixPadding,
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10.0),
+          onTap: () async {
+            SharedPreferences prefs = await _prefs;
+            phoneNumber = (prefs.getString('settings_phoneUser') ?? '');
 
-          if (phoneNumber != '') {
-            currentIndex = 0;
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => BottomBar()),
-            );
-          } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SignIn()),
-            );
-          }
-        },
-        child: Container(
-          height: 50,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                color: primaryColor.withOpacity(0.2),
-                spreadRadius: 2.5,
-                blurRadius: 2.5,
-              ),
-            ],
-          ),
-          child: Text(
-            'Увійти',
-            style: whiteColor20BoldTextStyle,
+            if (phoneNumber != '') {
+              currentIndex = 0;
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => BottomBar()),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignIn()),
+              );
+            }
+          },
+          child: Container(
+            height: 50,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: primaryColor,
+              borderRadius: BorderRadius.circular(10.0),
+              boxShadow: [
+                BoxShadow(
+                  color: primaryColor.withOpacity(0.2),
+                  spreadRadius: 2.5,
+                  blurRadius: 2.5,
+                ),
+              ],
+            ),
+            child: Text(
+              'Увійти',
+              style: whiteColor20BoldTextStyle,
+            ),
           ),
         ),
       ),
@@ -148,27 +179,30 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   signupButton(context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: fixPadding * 2.0,
-        vertical: fixPadding,
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(10.0),
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SignUp()),
+    return Visibility(
+      visible: visible,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: fixPadding * 2.0,
+          vertical: fixPadding,
         ),
-        child: Container(
-          height: 50,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(10.0),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10.0),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SignUp()),
           ),
-          child: Text(
-            'Реєстрація',
-            style: darkBlueColor20BoldTextStyle,
+          child: Container(
+            height: 50,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Text(
+              'Реєстрація',
+              style: darkBlueColor20BoldTextStyle,
+            ),
           ),
         ),
       ),

@@ -38,17 +38,16 @@ class _SignInState extends State<SignIn> {
   }
 
   _sendSMS() async {
-    return true;
 
     var phoneNumber = phoneNumberController.text;
 
     // Если нет номера телефона, то нечего проверять!
     if (phoneNumber.isEmpty) {
-      return;
+      return false;
     }
 
     if (_loading) {
-      return;
+      return false;
     }
 
     setState(() {
@@ -62,14 +61,14 @@ class _SignInState extends State<SignIn> {
       var endTime = 'AUTO';
       var lifetime = 12;
       var rate = 1;
-      var source = 'PA.UA';
+      var source = 'TEHNOTOP';
       var recipient = phoneNumber.toString();
-      var text = 'Ваш код підтвердження: $codeSMS.';
-      var description = 'PA.UA';
+      var text = 'Код підтвердження: $codeSMS.';
+      var description = 'TEHNOTOP';
       const url = 'http://sms-fly.ua/api/api.php';
 
       // Шифрование параметров авторизация для отправки СМС
-      var credentials = "380932044125:13971397z";
+      var credentials = "380677400202:lovege74";
       Codec<String, String> stringToBase64 = utf8.fuse(base64);
       String encodedLoginPassword = stringToBase64.encode(credentials);
 
@@ -98,20 +97,30 @@ class _SignInState extends State<SignIn> {
 
         var bodyResponse = response.body;
         if (bodyResponse.contains('state code="ACCEPT"')) {
-          setState(() {
-            _loading = false;
-          });
 
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               behavior: SnackBarBehavior.floating,
               content: Text('СМС відправлено!'),
               duration: Duration(seconds: 3)));
 
+          // Запись
+          setState(() {
+            _loading = false;
+          });
+
+          return true;
         }else{
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               behavior: SnackBarBehavior.floating,
               content: Text('Не вірно сформовано СМС!'),
               duration: Duration(seconds: 3)));
+
+          // Запись
+          setState(() {
+            _loading = false;
+          });
+
+          return false;
         }
       } else {
 
@@ -194,12 +203,19 @@ class _SignInState extends State<SignIn> {
               heightSpace,
               heightSpace,
               heightSpace,
-              userNameTextField(),
-              Text(
-                ' * Вкажіть Ваш номер телефону в повному форматі',
-                style: greyColor13RegularTextStyle,
-                textAlign: TextAlign.center,
+              numberPhoneTextField(),
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      ' * Вкажіть Ваш номер телефону в повному форматі',
+                      style: greyColor13RegularTextStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
               ),
+
               Text(
                 '  Наприклад, 0982223344',
                 style: greyColor13RegularTextStyle,
@@ -209,11 +225,11 @@ class _SignInState extends State<SignIn> {
           ),
         ),
       ),
-      bottomNavigationBar: signinButton(),
+      bottomNavigationBar: signingButton(),
     );
   }
 
-  userNameTextField() {
+  numberPhoneTextField() {
     return Container(
       margin: EdgeInsets.fromLTRB(
         fixPadding * 2.0,
@@ -262,7 +278,75 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  signinButton() {
+  checkExistCustomer() async {
+    dynamic myResponse;
+
+    var phoneNumberFromController = phoneNumberController.text;
+
+    try {
+      const url =
+          'http://195.34.205.251:35844/tehnotop/hs/app/v1/getdata';
+
+      var jsonPost = '{"method":"get_customer_exist", '
+          '"authorization":"38597848-s859-f588-g5568-1245986532sd", '
+          '"phone":"$phoneNumberFromController"}';
+
+      const headersPost = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS'
+      };
+
+      var response = await http
+          .post(Uri.parse(url), headers: headersPost, body: jsonPost)
+          .timeout(const Duration(seconds: 20), onTimeout: () {
+        return http.Response('Error', 500);
+      });
+
+      if (response.statusCode == 200) {
+        myResponse = json.decode(response.body);
+
+        // Если получили негативный результат от сервера, то прервем
+        if (myResponse['result'] == false) {
+
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text('Клієнта не знайдено!'),
+                duration: const Duration(seconds: 3)
+            )
+          );
+          return false;
+        }
+
+        if (myResponse['contragent'] == '') {
+          return false;
+        } else {
+          return true;
+        }
+
+      } else {
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text(
+                'Доступ до серверу відсутній! \nКод помилки: ${response.statusCode}.'),
+            duration: const Duration(seconds: 2)));
+        return true;
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(myResponse['message'].toString()),
+          duration: const Duration(seconds: 2)));
+
+      return true;
+    }
+  }
+
+  signingButton() {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: fixPadding * 2.0,
@@ -271,6 +355,13 @@ class _SignInState extends State<SignIn> {
       child: InkWell(
         borderRadius: BorderRadius.circular(10.0),
         onTap: () async {
+
+          if (phoneNumberController.text.isEmpty) {
+            showScaffoldMessage(context, 'Номер вказано не вірно!');
+            return;
+          }
+
+          // После проверки наличия номера телефона в базе данных, переведем на страницу OTP
           final c = <String>[];
           if(phoneNumberController.text.length < 10) c.add('Номер занадто короткий. \nПовинен мати не менше 10 символів.');
           if(phoneNumberController.text.length > 12) c.add('Номер занадто довгий. \nПовинен мати не більше 12 символів.');
@@ -281,21 +372,34 @@ class _SignInState extends State<SignIn> {
             c.add('Номер вказано не вірно.');
           }
 
+          // При достаточной длине массива сообщим пользователю список ошибок
           if (c.length != 0) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            behavior: SnackBarBehavior.floating,
-            content: Text(c.join('\n')),
-            duration: const Duration(seconds: 2)));
+            showScaffoldMessage(context, c.join('\n'));
             return;
           }
 
-          await _saveSettings();
-          if (await _sendSMS() == true) {
+          //Проверка наличия номера телефона в базе данных
+          var existCustomer = await checkExistCustomer();
+          if (!existCustomer) {
+            showScaffoldMessage(context,'Покупець не існує! Вам потрібно зарєструватися.');
+
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        Otp(phoneNumber,codeSMS.toString())));
+                        SignUp()));
+            return;
+          }
+
+          // Процедура отправки сообщения
+          var result = await _sendSMS();
+
+          if (result) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Otp(phoneNumberController.text,codeSMS.toString())));
           }
         },
         child: Container(

@@ -240,6 +240,7 @@ class _HomeState extends State<Home> {
 
         // Запомним имя покупателя
         if(constNameUser == ''){
+
           constNameUser = myResponse['contragent'];
           prefs.setString("settings_nameUser", constNameUser);
         }

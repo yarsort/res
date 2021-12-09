@@ -214,11 +214,13 @@ class _ProfileState extends State<Profile> {
         fixPadding,
       ),
       child: InkWell(
-        onTap: () =>
-            Navigator.push(
+        onTap: () async {
+          await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PersonalInformation()),
-            ),
+              MaterialPageRoute(
+                  builder: (context) => PersonalInformation()));
+          await _readSettings();
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -248,11 +250,13 @@ class _ProfileState extends State<Profile> {
               ],
             ),
             IconButton(
-              onPressed: () =>
-                  Navigator.push(
+              onPressed: () async {
+                  await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PersonalInformation())),
+                          builder: (context) => PersonalInformation()));
+                  await _readSettings();
+              },
               icon: Icon(
                 Icons.arrow_forward_ios,
                 color: greyColor,

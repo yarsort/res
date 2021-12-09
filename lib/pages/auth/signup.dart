@@ -39,13 +39,12 @@ class _SignUpState extends State<SignUp> {
     final SharedPreferences prefs = await _prefs;
     setState(() {
       prefs.setString("settings_nameUser", nameController.text);
-      prefs.setString("settings_phoneUser", phoneNumberController.text);
+      //prefs.setString("settings_phoneUser", phoneNumberController.text);
       prefs.setString("settings_emailUser", emailController.text);
     });
   }
 
   _sendSMS() async {
-    return true;
 
     var phoneNumber = phoneNumberController.text;
 
@@ -65,18 +64,18 @@ class _SignUpState extends State<SignUp> {
     try {
       var rng = Random();
       codeSMS = rng.nextInt(9000) + 1000;
-      var startTime = 'AUTO'; // отправить немедленно или ставим дату и время  в формате
+      var startTime = 'AUTO';                                                  // отправить немедленно или ставим дату и время  в формате
       var endTime = 'AUTO';
       var lifetime = 12;
       var rate = 1;
-      var source = 'PA.UA';
+      var source = 'TEHNOTOP';
       var recipient = phoneNumber.toString();
-      var text = 'Ваш код підтвердження: $codeSMS';
-      var description = 'PA.UA';
+      var text = 'Код підтвердження: $codeSMS.';
+      var description = 'TEHNOTOP';
       const url = 'http://sms-fly.ua/api/api.php';
 
       // Шифрование параметров авторизация для отправки СМС
-      var credentials = "380932044125:13971397z";
+      var credentials = "380677400202:lovege74";
       Codec<String, String> stringToBase64 = utf8.fuse(base64);
       String encodedLoginPassword = stringToBase64.encode(credentials);
 
@@ -84,8 +83,7 @@ class _SignUpState extends State<SignUp> {
       myXML = myXML + "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n";
       myXML = myXML + "<request>\r\n";
       myXML = myXML + "<operation>SENDSMS</operation>\r\n";
-      myXML = myXML +
-          "	<message start_time=\"$startTime\" end_time=\"$endTime\" lifetime=\"$lifetime\" rate=\"$rate\" desc=\"$description\" source=\"$source\">\"\r\n";
+      myXML = myXML + "	<message start_time=\"$startTime\" end_time=\"$endTime\" lifetime=\"$lifetime\" rate=\"$rate\" desc=\"$description\" source=\"$source\">\"\r\n";
       myXML = myXML + "	<body>$text</body>\r\n";
       myXML = myXML + "	<recipient>$recipient</recipient>\r\n";
       myXML = myXML + "</message>\r\n";
@@ -103,23 +101,36 @@ class _SignUpState extends State<SignUp> {
 
       // Если получили позитивный результат от сервера, то продолжим
       if (response.statusCode == 200) {
+
         var bodyResponse = response.body;
         if (bodyResponse.contains('state code="ACCEPT"')) {
-          setState(() {
-            _loading = false;
-          });
 
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               behavior: SnackBarBehavior.floating,
               content: Text('СМС відправлено!'),
               duration: Duration(seconds: 3)));
-        } else {
+
+          // Запись
+          setState(() {
+            _loading = false;
+          });
+
+          return true;
+        }else{
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               behavior: SnackBarBehavior.floating,
               content: Text('Не вірно сформовано СМС!'),
               duration: Duration(seconds: 3)));
+
+          // Запись
+          setState(() {
+            _loading = false;
+          });
+
+          return false;
         }
       } else {
+
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             behavior: SnackBarBehavior.floating,
             content: Text('Помилка відправки СМС! Сервіс недоступний!'),
@@ -132,7 +143,9 @@ class _SignUpState extends State<SignUp> {
 
         return false;
       }
+
     } catch (error) {
+
       // Отладка
       debugPrint(error.toString());
 
@@ -325,9 +338,12 @@ class _SignUpState extends State<SignUp> {
           ),
           child: Row(
             children: [
-              Text('* Не обов\'язково',
-                  style: greyColor13RegularTextStyle,
-                  textAlign: TextAlign.start),
+              Expanded(
+                child: Text(' * Не обов\'язково, але ми зможемо відправляти Вам '
+                    'спеціальні бонусні купони для ще більшої економії.',
+                    style: greyColor13RegularTextStyle,
+                    textAlign: TextAlign.start),
+              ),
             ],
           ),
         ),
@@ -343,7 +359,7 @@ class _SignUpState extends State<SignUp> {
             fixPadding * 2.0,
             fixPadding,
             fixPadding * 2.0,
-            fixPadding * 2.0,
+            fixPadding,
           ),
           padding: EdgeInsets.all(fixPadding * 1.5),
           decoration: BoxDecoration(
@@ -391,18 +407,18 @@ class _SignUpState extends State<SignUp> {
             fixPadding * 2.0,
             fixPadding,
           ),
-          child: Column(
+          child: Row(
             children: [
               Text(
-                ' * Вкажіть Ваш номер телефону в повному форматі',
+                ' * Вкажіть Ваш номер телефону в повному форматі.',
                 style: greyColor13RegularTextStyle,
                 textAlign: TextAlign.start,
               ),
-              Text(
-                '  Наприклад, 0982223344',
-                style: greyColor13RegularTextStyle,
-                textAlign: TextAlign.start,
-              ),
+              // Text(
+              //   '  Наприклад, 0982223344',
+              //   style: greyColor13RegularTextStyle,
+              //   textAlign: TextAlign.start,
+              // ),
             ],
           ),
         ),
@@ -414,7 +430,7 @@ class _SignUpState extends State<SignUp> {
     return Padding(
       padding: EdgeInsets.fromLTRB(
         fixPadding * 2.0,
-        fixPadding,
+        0,
         fixPadding * 2.0,
         fixPadding,
       ),
@@ -474,6 +490,59 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
+  checkExistCustomer() async {
+    dynamic myResponse;
+
+    var phoneNumberFromController = phoneNumberController.text;
+
+    try {
+      const url =
+          'http://195.34.205.251:35844/tehnotop/hs/app/v1/getdata';
+
+      var jsonPost = '{"method":"get_customer_exist", '
+          '"authorization":"38597848-s859-f588-g5568-1245986532sd", '
+          '"phone":"$phoneNumberFromController"}';
+
+      const headersPost = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS'
+      };
+
+      var response = await http
+          .post(Uri.parse(url), headers: headersPost, body: jsonPost)
+          .timeout(const Duration(seconds: 20), onTimeout: () {
+        return http.Response('Error', 500);
+      });
+
+      if (response.statusCode == 200) {
+        myResponse = json.decode(response.body);
+
+        // Если получили негативный результат от сервера, то прервем
+        if (myResponse['result'] == false) {
+          showScaffoldMessage(context,'Помилка обробки даних!');
+          return false;
+        }
+
+        if (myResponse['contragent'] != '') {
+          return true;
+        } else {
+          return true;
+        }
+
+      } else {
+        showScaffoldMessage(context,'Доступ до серверу відсутній! \nКод помилки: ${response.statusCode}.');
+        return true;
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+
+      showScaffoldMessage(context,myResponse['message'].toString());
+
+      return true;
+    }
+  }
+
   signupButton() {
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -483,13 +552,51 @@ class _SignUpState extends State<SignUp> {
       child: InkWell(
         borderRadius: BorderRadius.circular(10.0),
         onTap: () async {
-          await _saveSettings();
-          if (await _sendSMS() == true) {
+          if (nameController.text.isEmpty) {
+            showScaffoldMessage(context, 'Прізвище та ім\'я вказано не вірно!');
+            return;
+          }
+
+          if (phoneNumberController.text.isEmpty) {
+            showScaffoldMessage(context, 'Номер вказано не вірно!');
+            return;
+          }
+
+          final c = <String>[];
+          if (phoneNumberController.text.length < 10) c.add(
+              'Номер занадто короткий. \nПовинен мати не менше 10 символів.');
+          if (phoneNumberController.text.length > 12) c.add(
+              'Номер занадто довгий. \nПовинен мати не більше 12 символів.');
+
+          String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+          RegExp regExp = RegExp(pattern);
+          if (!regExp.hasMatch(phoneNumberController.text)) {
+            c.add('Номер вказано не вірно.');
+          }
+
+          // При достаточной длине массива сообщим пользователю список ошибок
+          if (c.length != 0) {
+            showScaffoldMessage(context, c.join('\n'));
+            return;
+          }
+
+          //Проверка наличия номера телефона в базе данных
+          var existCustomer = await checkExistCustomer();
+          if (!existCustomer) {
+            showScaffoldMessage(context,'Покупець вже існує! Вам залишилось авторизуватися.');
+          }
+
+          // Переадресуем на другую страницу проверки
+          var result = await _sendSMS();
+
+          _saveSettings(); // Запишем имя и почту
+
+          if (result) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        Otp(phoneNumber, codeSMS.toString())));
+                        Otp(phoneNumberController.text, codeSMS.toString())));
           }
         },
         child: Container(
