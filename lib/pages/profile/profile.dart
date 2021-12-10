@@ -128,6 +128,16 @@ class _ProfileState extends State<Profile> {
                   ontap: () =>
                       Navigator.push(
                         context,
+                        MaterialPageRoute(builder: (context) => Search()),
+                      ),
+                  icon: Icons.category,
+                  title: 'Пошук товарів',
+                  color: darkBlueColor,
+                ),
+                profileDetailsRow(
+                  ontap: () =>
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(builder: (context) => Settings()),
                       ),
                   icon: Icons.settings_outlined,

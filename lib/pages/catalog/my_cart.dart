@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 import 'package:tehnotop/constants/screens.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class MyCart extends StatefulWidget {
   @override
@@ -66,7 +67,7 @@ class _MyCartState extends State<MyCart> {
   }
 
   fillTestData() {
-    return;
+
     if (globalListItemsBasket.isEmpty) {
       //Для тестирования заказов
       var countOrder = 10;
@@ -120,190 +121,229 @@ class _MyCartState extends State<MyCart> {
         final item = globalListItemsBasket[index];
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            return Container(
-              margin: EdgeInsets.fromLTRB(
-                fixPadding * 2.0,
-                fixPadding,
-                fixPadding * 2.0,
-                fixPadding,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [
-                  BoxShadow(
-                    color: greyColor.withOpacity(0.1),
-                    spreadRadius: 2.5,
-                    blurRadius: 2.5,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
+            return Slidable(
+              actionPane: SlidableDrawerActionPane(),
+              actionExtentRatio: 0.25,
+              secondaryActions: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: fixPadding, top: fixPadding),
+                  child: Row(
+                    children: [
+                      IconSlideAction(
+                        caption: 'Видалити',
+                        color: whiteColor,
+                        icon: Icons.info,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                              builder: (context) => ParticularItem(
+                                tag: globalListItemsBasket[index],
+                              ),
+                            ),
+                          );
+                        },
                       ),
+                      IconSlideAction(
+                        caption: 'Видалити',
+                        color: primaryColor,
+                        icon: Icons.delete,
+                        onTap: () {
+                          setState(() {
+                            globalListItemsBasket.removeAt(index);
+                          });
+                          calculateTotal();
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+              child: Container(
+                margin: EdgeInsets.fromLTRB(
+                  fixPadding * 2.0,
+                  fixPadding,
+                  fixPadding * 2.0,
+                  fixPadding,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: greyColor.withOpacity(0.1),
+                      spreadRadius: 2.5,
+                      blurRadius: 2.5,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            padding: const EdgeInsets.all(fixPadding),
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.name,
-                                  style: darkBlueColor14SemiBoldTextStyle,
-                                ),
-                                heightSpace,
-                                Text(
-                                  'Код: ' + item.code,
-                                  style: greyColor12MediumTextStyle,
-                                ),
-                                Text(
-                                  'Артикул: ' + item.article,
-                                  style: greyColor12MediumTextStyle,
-                                ),
-                              ],
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: whiteColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              padding: const EdgeInsets.all(fixPadding),
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.name,
+                                    style: darkBlueColor14SemiBoldTextStyle,
+                                  ),
+                                  heightSpace,
+                                  Text(
+                                    'Код: ' + item.code,
+                                    style: greyColor12MediumTextStyle,
+                                  ),
+                                  Text(
+                                    'Артикул: ' + item.article,
+                                    style: greyColor12MediumTextStyle,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                            margin: EdgeInsets.all(10),
-                            child: Center(
-                              child: CachedNetworkImage(
-                                imageUrl:
-                                    "https://i.eldorado.ua/goods_images/1038962/7516717-1637327149.jpg",
-                                placeholder: (context, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              margin: EdgeInsets.all(10),
+                              child: Center(
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      "https://i.eldorado.ua/goods_images/1038962/7516717-1637327149.jpg",
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(fixPadding),
-                    decoration: BoxDecoration(
-                      color: lightBlueColor,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
+                        ],
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              '₴' + sumOrderDoubleToString(item.sum),
-                              style: primaryColor13SemiBoldTextStyle,
-                            ),
-                            widthSpace,
-                          ],
+                    Container(
+                      padding: EdgeInsets.all(fixPadding),
+                      decoration: BoxDecoration(
+                        color: lightBlueColor,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
                         ),
-                        Row(
-                          children: [
-                            widthSpace,
-                            widthSpace,
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  globalListItemsBasket.removeAt(index);
-                                });
-                                calculateTotal();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(4.0),
-                                decoration: BoxDecoration(
-                                  color: primaryColor,
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: Icon(
-                                  Icons.delete_outline,
-                                  size: 12,
-                                  color: whiteColor,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                '₴' + sumOrderDoubleToString(item.sum),
+                                style: primaryColor13SemiBoldTextStyle,
+                              ),
+                              widthSpace,
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              widthSpace,
+                              widthSpace,
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    globalListItemsBasket.removeAt(index);
+                                  });
+                                  calculateTotal();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(4.0),
+                                  decoration: BoxDecoration(
+                                    color: primaryColor,
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                  child: Icon(
+                                    Icons.delete_outline,
+                                    size: 12,
+                                    color: whiteColor,
+                                  ),
                                 ),
                               ),
-                            ),
-                            widthSpace,
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  globalListItemsBasket[index].count == 1
-                                      ? globalListItemsBasket[index].count = 1
-                                      : globalListItemsBasket[index].count -= 1;
-                                  globalListItemsBasket[index].sum =
-                                      globalListItemsBasket[index].count *
-                                          globalListItemsBasket[index].price;
-                                });
-                                calculateTotal();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(4.0),
-                                decoration: BoxDecoration(
-                                  color: darkBlueColor,
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: Icon(
-                                  Icons.remove,
-                                  size: 12,
-                                  color: whiteColor,
-                                ),
-                              ),
-                            ),
-                            widthSpace,
-                            widthSpace,
-                            Text(
-                              item.count.toString(),
-                              style: darkBlueColor13SemiBoldTextStyle,
-                            ),
-                            widthSpace,
-                            widthSpace,
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  var tempIndex = globalListItemsBasket.indexOf(item);
-                                  globalListItemsBasket[tempIndex].count += 1;
-                                  globalListItemsBasket[tempIndex].sum =
-                                      globalListItemsBasket[tempIndex].count *
-                                          globalListItemsBasket[tempIndex].price;
-                                });
-                                calculateTotal();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(4.0),
-                                decoration: BoxDecoration(
-                                  color: darkBlueColor,
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: Icon(
-                                  Icons.add,
-                                  size: 12,
-                                  color: whiteColor,
+                              widthSpace,
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    globalListItemsBasket[index].count == 1
+                                        ? globalListItemsBasket[index].count = 1
+                                        : globalListItemsBasket[index].count -= 1;
+                                    globalListItemsBasket[index].sum =
+                                        globalListItemsBasket[index].count *
+                                            globalListItemsBasket[index].price;
+                                  });
+                                  calculateTotal();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(4.0),
+                                  decoration: BoxDecoration(
+                                    color: darkBlueColor,
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                  child: Icon(
+                                    Icons.remove,
+                                    size: 12,
+                                    color: whiteColor,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                              widthSpace,
+                              widthSpace,
+                              Text(
+                                item.count.toString(),
+                                style: darkBlueColor13SemiBoldTextStyle,
+                              ),
+                              widthSpace,
+                              widthSpace,
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    var tempIndex = globalListItemsBasket.indexOf(item);
+                                    globalListItemsBasket[tempIndex].count += 1;
+                                    globalListItemsBasket[tempIndex].sum =
+                                        globalListItemsBasket[tempIndex].count *
+                                            globalListItemsBasket[tempIndex].price;
+                                  });
+                                  calculateTotal();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(4.0),
+                                  decoration: BoxDecoration(
+                                    color: darkBlueColor,
+                                    borderRadius: BorderRadius.circular(4.0),
+                                  ),
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 12,
+                                    color: whiteColor,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
           },

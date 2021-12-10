@@ -79,7 +79,7 @@ class _FavoritesState extends State<Favorites> {
             size: 60.0,
           ),
           Text(
-            'Ви нічого не ',
+            'Ви нічого не вподобали',
             style: greyColor14MediumTextStyle,
           ),
         ],
