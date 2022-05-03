@@ -726,3 +726,17 @@ class _HomeState extends State<Home> {
   }
 
 }
+
+// Класс для отображения списка товаров
+Widget createListView(List items) {
+  return new ListView(
+      shrinkWrap: true,
+      primary: false,
+      children: items.map((productInfo) {
+        return ListTile(
+          leading: Tab(icon: Image.network('http://127.0.0.1:8080${productInfo.img}')),
+          title: Text(productInfo.name),
+          subtitle: Text('Цена: ${productInfo.price}'),
+        );
+      }).toList());
+}

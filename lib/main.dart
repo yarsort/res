@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'constants/screens.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,15 @@ class MyApp extends StatelessWidget {
           color: bgColor
         ),
       ),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English, no country code
+        Locale('uk', ''), // Ukrainian, no country code
+      ],
       home: SplashScreen(),
     );
   }

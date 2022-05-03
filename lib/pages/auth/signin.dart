@@ -63,8 +63,8 @@ class _SignInState extends State<SignIn> {
       var rate = 1;
       var source = 'TEHNOTOP';
       var recipient = phoneNumber.toString();
-      var text = 'Код підтвердження: $codeSMS.';
-      var description = 'TEHNOTOP';
+      var text = 'Код підтвердження для додатку: $codeSMS.';
+      var description = 'APP TEHNOTOP';
       const url = 'http://sms-fly.ua/api/api.php';
 
       // Шифрование параметров авторизация для отправки СМС

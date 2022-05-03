@@ -70,7 +70,7 @@ class _SignUpState extends State<SignUp> {
       var rate = 1;
       var source = 'TEHNOTOP';
       var recipient = phoneNumber.toString();
-      var text = 'Код підтвердження: $codeSMS.';
+      var text = 'Код підтвердження додатку: $codeSMS.';
       var description = 'TEHNOTOP';
       const url = 'http://sms-fly.ua/api/api.php';
 
