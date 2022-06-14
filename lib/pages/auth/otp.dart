@@ -97,6 +97,7 @@ class _OtpState extends State<Otp> {
                     heightSpace,
                     heightSpace,
                     codeTextField(),
+                    verifyButton(),
                   ],
                 ),
               ),
@@ -104,7 +105,7 @@ class _OtpState extends State<Otp> {
           ),
         ],
       ),
-      bottomNavigationBar: verifyButton(),
+      //bottomNavigationBar: verifyButton(),
     );
   }
 

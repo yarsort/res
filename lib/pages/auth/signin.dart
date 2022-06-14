@@ -221,11 +221,12 @@ class _SignInState extends State<SignIn> {
                 style: greyColor13RegularTextStyle,
                 textAlign: TextAlign.center,
               ),
+              signingButton(),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: signingButton(),
+      //bottomNavigationBar: signingButton(),
     );
   }
 
@@ -263,7 +264,7 @@ class _SignInState extends State<SignIn> {
               cursorColor: primaryColor,
               controller: phoneNumberController,
               style: greyColor16MediumTextStyle,
-              keyboardType: TextInputType.phone,
+              keyboardType: TextInputType.numberWithOptions(),
               decoration: InputDecoration(
                 isDense: true,
                 contentPadding: EdgeInsets.zero,
