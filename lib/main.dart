@@ -29,15 +29,6 @@ class MyApp extends StatelessWidget {
           color: bgColor
         ),
       ),
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: [
-        Locale('en', ''), // English, no country code
-        Locale('uk', ''), // Ukrainian, no country code
-      ],
       home: SplashScreen(),
     );
   }

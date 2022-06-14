@@ -110,7 +110,7 @@ class _OrderItemsInformationState extends State<OrderItemsInformation> {
     });
 
     try {
-      const url = 'http://195.34.205.251:35844/tehnotop/hs/app/v1/getdata';
+      const url = 'http://91.218.88.160:35844/baza_center/hs/app/v1/getdata';
       //'http://10.0.9.30:8080/tehnotop/hs/app/v1/getdata';
       //const url = 'http://10.0.0.3/baza_sklad_center/hs/kitchen/v1/getdata';
 

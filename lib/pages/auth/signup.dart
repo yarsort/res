@@ -497,7 +497,7 @@ class _SignUpState extends State<SignUp> {
 
     try {
       const url =
-          'http://195.34.205.251:35844/tehnotop/hs/app/v1/getdata';
+          'http://91.218.88.160:35844/baza_center/hs/app/v1/getdata';
 
       var jsonPost = '{"method":"get_customer_exist", '
           '"authorization":"38597848-s859-f588-g5568-1245986532sd", '
