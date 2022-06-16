@@ -114,7 +114,7 @@ class _ProfileState extends State<Profile> {
                   title: 'Замовлення',
                   color: darkBlueColor,
                 ),
-                profileDetailsRow(
+                /*profileDetailsRow(
                   ontap: () =>
                       Navigator.push(
                         context,
@@ -124,7 +124,7 @@ class _ProfileState extends State<Profile> {
                   title: 'Кошик покупок',
                   color: darkBlueColor,
                 ),
-                /*profileDetailsRow(
+                profileDetailsRow(
                   ontap: () =>
                       Navigator.push(
                         context,
