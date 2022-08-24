@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:tehnotop/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -134,19 +133,16 @@ class _PersonalInformationState extends State<PersonalInformation> {
     return Stack(
       children: [
         Center(
-          child: InkWell(
-            onTap: () => changeProfilePick(),
-            child: Hero(
-              tag: 'profilePick',
-              child: Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/logo.png'),
-                    fit: BoxFit.cover,
-                  ),
+          child: Hero(
+            tag: 'profilePick',
+            child: Container(
+              height: 80,
+              width: 80,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage('assets/logo.png'),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),

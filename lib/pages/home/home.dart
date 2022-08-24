@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:tehnotop/constants/screens.dart';
 import 'package:tehnotop/widget/column_builder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -316,7 +315,7 @@ class _HomeState extends State<Home> {
               child: Container(
                 //color: whiteColor,
                 height: height * 0.15,
-                width: 210,
+                width: 220,
                 decoration: BoxDecoration(
                   color: whiteColor,
                   borderRadius: BorderRadius.circular(10),
@@ -546,11 +545,11 @@ class _HomeState extends State<Home> {
                         Expanded(
                           child: InkWell(
                             onTap: () async {
-                              final Uri launchUri = Uri(
+                              final Uri uriTel = Uri(
                                 scheme: 'tel',
                                 path: tel,
                               );
-                              await launch(launchUri.toString());
+                              await launchUrl(uriTel);
                               Navigator.pop(context);
                             },
                             child: Container(
