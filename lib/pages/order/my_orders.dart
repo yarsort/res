@@ -120,7 +120,7 @@ class _MyOrdersState extends State<MyOrders> {
     });
 
     try {
-      const url = 'http://91.218.88.160:35844/baza_center/hs/app/v1/getdata';
+      const url = 'http://api-tehno.yarsoft.com.ua:35844/tehnotop/hs/app/v1/getdata';
 
       var jsonPost = '{"method":"get_client_orders", '
           '"authorization":"38597848-s859-f588-g5568-1245986532sd", '

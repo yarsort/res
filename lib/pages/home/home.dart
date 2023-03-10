@@ -151,7 +151,7 @@ class _HomeState extends State<Home> {
   _loadDefaultBonus() {
     if (listBonuses.length == 0) {
       Bonus newBonusActive = Bonus(
-          name: 'Активні бонуси',
+          name: 'Active bonus',
           sum: 0.00,
           type: 'active',
           activation: 'Термін дії невідомий');
@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
       listBonuses.add(newBonusActive);
 
       Bonus newBonusPassive = Bonus(
-          name: 'Пасивні бонуси',
+          name: 'Passive bonus',
           sum: 0.00,
           type: 'passive',
           activation: 'Дата активації невідома');
@@ -168,7 +168,7 @@ class _HomeState extends State<Home> {
     }else{
       if(constBarcodeUser != '') {
         Bonus newBonusCard = Bonus(
-            name: 'Бонусна карта',
+            name: 'Card',
             sum: 0.00,
             type: '',
             activation: '');
@@ -190,7 +190,7 @@ class _HomeState extends State<Home> {
 
     try {
       const url =
-          'http://91.218.88.160:35844/baza_center/hs/app/v1/getdata';
+          'http://api-tehno.yarsoft.com.ua:35844/tehnotop/hs/app/v1/getdata';
 
       var jsonPost = '{"method":"get_client_data", '
           '"authorization":"38597848-s859-f588-g5568-1245986532sd", '

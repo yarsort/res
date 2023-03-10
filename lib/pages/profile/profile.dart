@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
-import 'package:tehnotop/constants/screens.dart';
+
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tehnotop/constants/screens.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -8,7 +11,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   String nameUser = '';
@@ -40,7 +42,8 @@ class _ProfileState extends State<Profile> {
         centerTitle: true,
         backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
-        title: Text('Профіль',
+        title: Text(
+          'Профіль',
           style: whiteColor15SemiBoldTextStyle,
           textAlign: TextAlign.center,
         ),
@@ -57,14 +60,12 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: [
                 profileDetailsRow(
-                  ontap: () =>
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PaymentMethod()),
-                      ),
+                  ontap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PaymentMethod()),
+                  ),
                   icon: Icons.credit_card,
-                  title: 'Способи оплати',
+                  title: 'Payments',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
@@ -73,7 +74,7 @@ class _ProfileState extends State<Profile> {
                     MaterialPageRoute(builder: (context) => DeliveryMethod()),
                   ),
                   icon: Icons.location_on_outlined,
-                  title: 'Адреси доставки',
+                  title: 'Delivery address',
                   color: darkBlueColor,
                 ),
                 // profileDetailsRow(
@@ -92,14 +93,12 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: [
                 profileDetailsRow(
-                  ontap: () =>
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Notifications()),
-                      ),
+                  ontap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Notifications()),
+                  ),
                   icon: Icons.notifications_outlined,
-                  title: 'Нагадування',
+                  title: 'Notifications',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
@@ -111,47 +110,25 @@ class _ProfileState extends State<Profile> {
                     );
                   },
                   icon: Icons.list_alt,
-                  title: 'Замовлення',
-                  color: darkBlueColor,
-                ),
-                /*profileDetailsRow(
-                  ontap: () =>
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyCart()),
-                      ),
-                  icon: Icons.shopping_cart_outlined,
-                  title: 'Кошик покупок',
+                  title: 'Orders',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
-                  ontap: () =>
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Search()),
-                      ),
-                  icon: Icons.category,
-                  title: 'Пошук товарів',
-                  color: darkBlueColor,
-                ),*/
-                profileDetailsRow(
-                  ontap: () =>
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Settings()),
-                      ),
+                  ontap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Settings()),
+                  ),
                   icon: Icons.settings_outlined,
-                  title: 'Налаштування',
+                  title: 'Settings',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
-                  ontap: () =>
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Support()),
-                      ),
+                  ontap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Support()),
+                  ),
                   icon: Icons.help_outline_outlined,
-                  title: 'Підтримка',
+                  title: 'Support',
                   color: darkBlueColor,
                 ),
               ],
@@ -159,10 +136,18 @@ class _ProfileState extends State<Profile> {
           ),
           profileDetails(
             child: profileDetailsRow(
+              ontap: () => deleteAccountDialog(),
+              icon: Icons.logout,
+              title: 'Delete account',
+              color: Colors.red,
+            ),
+          ),
+          profileDetails(
+            child: profileDetailsRow(
               ontap: () => logoutDialog(),
               icon: Icons.logout,
-              title: 'Вихід',
-              color: primaryColor,
+              title: 'Exit',
+              color: darkBlueColor,
             ),
           ),
         ],
@@ -180,9 +165,7 @@ class _ProfileState extends State<Profile> {
         child: CircleAvatar(
           radius: 30,
           child: ClipOval(
-            child: Image.file(image,
-                width: 300 ,
-                height: 300),
+            child: Image.file(image, width: 300, height: 300),
           ),
         ),
       ),
@@ -212,7 +195,6 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
-
   }
 
   userDetails() {
@@ -225,10 +207,7 @@ class _ProfileState extends State<Profile> {
       ),
       child: InkWell(
         onTap: () async {
-          await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => PersonalInformation()));
+          await Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalInformation()));
           await _readSettings();
         },
         child: Row(
@@ -261,11 +240,8 @@ class _ProfileState extends State<Profile> {
             ),
             IconButton(
               onPressed: () async {
-                  await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PersonalInformation()));
-                  await _readSettings();
+                await Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalInformation()));
+                await _readSettings();
               },
               icon: Icon(
                 Icons.arrow_forward_ios,
@@ -339,6 +315,53 @@ class _ProfileState extends State<Profile> {
     );
   }
 
+  _deleteAccount() async {
+    SharedPreferences prefs = await _prefs;
+    var phoneNumber = prefs.getString('settings_phoneUser');
+
+    dynamic myResponse;
+
+    try {
+      const url = 'http://api-tehno.yarsoft.com.ua:35844/tehnotop/hs/app/v1/getdata';
+
+      var jsonPost = '{"method":"get_delete_customer", '
+          '"authorization":"38597848-s859-f588-g5568-1245986532sd", '
+          '"phone":"$phoneNumber"}';
+
+      const headersPost = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS'
+      };
+
+      var response = await http
+          .post(Uri.parse(url), headers: headersPost, body: jsonPost)
+          .timeout(const Duration(seconds: 20), onTimeout: () {
+        return http.Response('Error', 500);
+      });
+
+      if (response.statusCode == 200) {
+
+        /// Clear all data about client and reset this app
+        await _saveSettings();
+        Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen()));
+
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            behavior: SnackBarBehavior.floating,
+            content: Text('Доступ до серверу відсутній! \nКод помилки: ${response.statusCode}.'),
+            duration: const Duration(seconds: 2)));
+      }
+    } catch (error) {
+      debugPrint(error.toString());
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          behavior: SnackBarBehavior.floating,
+          content: Text(myResponse['message'].toString()),
+          duration: const Duration(seconds: 2)));
+    }
+  }
+
   _saveSettings() async {
     final SharedPreferences prefs = await _prefs;
     setState(() {
@@ -369,8 +392,7 @@ class _ProfileState extends State<Profile> {
       builder: (context) {
         return Dialog(
           backgroundColor: bgColor,
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           insetPadding: EdgeInsets.symmetric(horizontal: fixPadding * 5.0),
           child: Wrap(
             children: [
@@ -416,10 +438,7 @@ class _ProfileState extends State<Profile> {
                             onTap: () async {
                               await _saveSettings();
 
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SplashScreen()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen()));
                             },
                             child: Container(
                               padding: EdgeInsets.all(fixPadding),
@@ -431,6 +450,82 @@ class _ProfileState extends State<Profile> {
                               ),
                               child: Text(
                                 'Вихід',
+                                style: whiteColor15BoldTextStyle,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  deleteAccountDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: bgColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          insetPadding: EdgeInsets.symmetric(horizontal: fixPadding * 5.0),
+          child: Wrap(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(fixPadding * 1.5),
+                child: Column(
+                  children: [
+                    Text('Ви дійсно хочете видалити аккаунт?', style: darkBlueColor15SemiBoldTextStyle),
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    heightSpace,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: InkWell(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              padding: EdgeInsets.all(fixPadding),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: primaryColor),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Text(
+                                'Відміна',
+                                style: primaryColor15BoldTextStyle,
+                              ),
+                            ),
+                          ),
+                        ),
+                        widthSpace,
+                        widthSpace,
+                        widthSpace,
+                        widthSpace,
+                        Expanded(
+                          child: InkWell(
+                            onTap: () async {
+                              await _deleteAccount();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(fixPadding),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: primaryColor,
+                                border: Border.all(color: primaryColor),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Text(
+                                'Видалити',
                                 style: whiteColor15BoldTextStyle,
                               ),
                             ),
