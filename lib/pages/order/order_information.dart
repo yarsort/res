@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:tehnotop/constants/screens.dart';
+import 'package:tehnotop/pages/system.dart';
 import 'package:tehnotop/widget/column_builder.dart';
 
 class OrderItemsInformation extends StatefulWidget {
@@ -110,7 +111,7 @@ class _OrderItemsInformationState extends State<OrderItemsInformation> {
     });
 
     try {
-      const url = 'http://api-tehno.yarsoft.com.ua:35844/tehnotop/hs/app/v1/getdata';
+      const url = connectUrl;
 
       var jsonPost = '{"method":"get_client_order", '
           '"authorization":"38597848-s859-f588-g5568-1245986532sd", '

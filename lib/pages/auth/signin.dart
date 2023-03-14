@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:tehnotop/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tehnotop/pages/system.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -27,13 +28,6 @@ class _SignInState extends State<SignIn> {
     SharedPreferences prefs = await _prefs;
     setState(() {
       phoneNumberController.text = (prefs.getString('settings_phoneUser') ?? '');
-    });
-  }
-
-  _saveSettings() async {
-    final SharedPreferences prefs = await _prefs;
-    setState(() {
-      prefs.setString("settings_phoneUser", phoneNumberController.text);
     });
   }
 
@@ -285,8 +279,7 @@ class _SignInState extends State<SignIn> {
     var phoneNumberFromController = phoneNumberController.text;
 
     try {
-      const url =
-          'http://91.218.88.160:35844/baza_center/hs/app/v1/getdata';
+      const url = connectUrl;
 
       var jsonPost = '{"method":"get_customer_exist", '
           '"authorization":"38597848-s859-f588-g5568-1245986532sd", '
