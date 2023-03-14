@@ -70,7 +70,7 @@ class _MyCartState extends State<MyCart> {
 
     if (globalListItemsBasket.isEmpty) {
       //Для тестирования заказов
-      var countOrder = 10;
+      var countOrder = 5;
       var price = 14999.0;
 
       while (countOrder != 0) {
@@ -130,8 +130,8 @@ class _MyCartState extends State<MyCart> {
                   child: Row(
                     children: [
                       IconSlideAction(
-                        caption: 'Видалити',
-                        color: whiteColor,
+                        caption: 'Info',
+                        color: primaryColor,
                         icon: Icons.info,
                         onTap: () {
                           Navigator.push(
@@ -144,17 +144,17 @@ class _MyCartState extends State<MyCart> {
                           );
                         },
                       ),
-                      IconSlideAction(
-                        caption: 'Видалити',
-                        color: primaryColor,
-                        icon: Icons.delete,
-                        onTap: () {
-                          setState(() {
-                            globalListItemsBasket.removeAt(index);
-                          });
-                          calculateTotal();
-                        },
-                      ),
+                      // IconSlideAction(
+                      //   caption: 'Видалити',
+                      //   color: primaryColor,
+                      //   icon: Icons.delete,
+                      //   onTap: () {
+                      //     setState(() {
+                      //       globalListItemsBasket.removeAt(index);
+                      //     });
+                      //     calculateTotal();
+                      //   },
+                      // ),
                     ],
                   ),
                 ),

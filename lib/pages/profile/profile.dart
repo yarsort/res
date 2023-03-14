@@ -80,6 +80,15 @@ class _ProfileState extends State<Profile> {
                 // profileDetailsRow(
                 //   ontap: () => Navigator.push(
                 //     context,
+                //     MaterialPageRoute(builder: (context) => MyCart()),
+                //   ),
+                //   icon: Icons.location_on_outlined,
+                //   title: 'Search products',
+                //   color: darkBlueColor,
+                // ),
+                // profileDetailsRow(
+                //   ontap: () => Navigator.push(
+                //     context,
                 //     MaterialPageRoute(builder: (context) => ShareAndEarn()),
                 //   ),
                 //   icon: 'assets/icons/share.png',
