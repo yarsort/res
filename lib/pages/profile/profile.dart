@@ -23,7 +23,7 @@ class _ProfileState extends State<Profile> {
     setState(() {
       nameUser = (prefs.getString('settings_nameUser') ?? '');
       phoneUser = (prefs.getString('settings_phoneUser') ?? 'Заповніть Ваші реквізити');
-      emailUser = (prefs.getString('settings_emailUser') ?? '');
+      emailUser = (prefs.getString('settings_emailUser') ?? 'Поштова адреса не вказана');
     });
   }
 
@@ -65,7 +65,7 @@ class _ProfileState extends State<Profile> {
                     MaterialPageRoute(builder: (context) => PaymentMethod()),
                   ),
                   icon: Icons.credit_card,
-                  title: 'Payments',
+                  title: 'Види оплат',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
@@ -74,7 +74,7 @@ class _ProfileState extends State<Profile> {
                     MaterialPageRoute(builder: (context) => DeliveryMethod()),
                   ),
                   icon: Icons.location_on_outlined,
-                  title: 'Delivery address',
+                  title: 'Адреси доставки',
                   color: darkBlueColor,
                 ),
                 // profileDetailsRow(
@@ -107,7 +107,7 @@ class _ProfileState extends State<Profile> {
                     MaterialPageRoute(builder: (context) => Notifications()),
                   ),
                   icon: Icons.notifications_outlined,
-                  title: 'Notifications',
+                  title: 'Нагадування',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
@@ -119,7 +119,7 @@ class _ProfileState extends State<Profile> {
                     );
                   },
                   icon: Icons.list_alt,
-                  title: 'Orders',
+                  title: 'Замовлення',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
@@ -128,7 +128,7 @@ class _ProfileState extends State<Profile> {
                     MaterialPageRoute(builder: (context) => Settings()),
                   ),
                   icon: Icons.settings_outlined,
-                  title: 'Settings',
+                  title: 'Налаштування',
                   color: darkBlueColor,
                 ),
                 profileDetailsRow(
@@ -137,7 +137,7 @@ class _ProfileState extends State<Profile> {
                     MaterialPageRoute(builder: (context) => Support()),
                   ),
                   icon: Icons.help_outline_outlined,
-                  title: 'Support',
+                  title: 'Підтримка',
                   color: darkBlueColor,
                 ),
               ],
@@ -146,8 +146,8 @@ class _ProfileState extends State<Profile> {
           profileDetails(
             child: profileDetailsRow(
               ontap: () => deleteAccountDialog(),
-              icon: Icons.logout,
-              title: 'Delete account',
+              icon: Icons.delete,
+              title: 'Видалити аккаунт',
               color: Colors.red,
             ),
           ),
@@ -155,7 +155,7 @@ class _ProfileState extends State<Profile> {
             child: profileDetailsRow(
               ontap: () => logoutDialog(),
               icon: Icons.logout,
-              title: 'Exit',
+              title: 'Вихід',
               color: darkBlueColor,
             ),
           ),

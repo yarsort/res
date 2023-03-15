@@ -151,7 +151,7 @@ class _HomeState extends State<Home> {
   _loadDefaultBonus() {
     if (listBonuses.length == 0) {
       Bonus newBonusActive = Bonus(
-          name: 'Active bonus',
+          name: 'Активні бонуси',
           sum: 0.00,
           type: 'active',
           activation: 'Термін дії невідомий');
@@ -159,7 +159,7 @@ class _HomeState extends State<Home> {
       listBonuses.add(newBonusActive);
 
       Bonus newBonusPassive = Bonus(
-          name: 'Passive bonus',
+          name: 'Пасивні бонуси',
           sum: 0.00,
           type: 'passive',
           activation: 'Дата активації невідома');
@@ -168,7 +168,7 @@ class _HomeState extends State<Home> {
     }else{
       if(constBarcodeUser != '') {
         Bonus newBonusCard = Bonus(
-            name: 'Card',
+            name: 'Картка клієнта',
             sum: 0.00,
             type: '',
             activation: '');
