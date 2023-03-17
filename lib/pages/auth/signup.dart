@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:tehnotop/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tehnotop/pages/system.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -496,8 +497,7 @@ class _SignUpState extends State<SignUp> {
     var phoneNumberFromController = phoneNumberController.text;
 
     try {
-      const url =
-          'http://91.218.88.160:35844/baza_center/hs/app/v1/getdata';
+      const url = connectUrl;
 
       var jsonPost = '{"method":"get_customer_exist", '
           '"authorization":"38597848-s859-f588-g5568-1245986532sd", '
@@ -583,7 +583,16 @@ class _SignUpState extends State<SignUp> {
           //Проверка наличия номера телефона в базе данных
           var existCustomer = await checkExistCustomer();
           if (!existCustomer) {
+
             showScaffoldMessage(context,'Покупець вже існує! Вам залишилось авторизуватися.');
+
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        SignIn()));
+
+            return;
           }
 
           // Переадресуем на другую страницу проверки

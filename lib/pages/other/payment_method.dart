@@ -24,15 +24,43 @@ class _PaymentMethodState extends State<PaymentMethod> {
     },
     {
       'image': 'assets/paymentMethod/cash.png',
-      'method': 'Кредит "Монобанк"',
+      'method': 'Оплата частинами "Приватбанк"',
     },
     {
       'image': 'assets/paymentMethod/cash.png',
-      'method': 'Кредит "Приват"',
+      'method': 'Оплата частинами "Монобанк"',
     },
     {
       'image': 'assets/paymentMethod/cash.png',
-      'method': 'Кредит "Альфа Банк"',
+      'method': 'Оплата частинами "Пумб Банк"',
+    },
+    {
+      'image': 'assets/paymentMethod/cash.png',
+      'method': 'Оплата частинами "Sense Bank"',
+    },
+    {
+      'image': 'assets/paymentMethod/cash.png',
+      'method': 'Кредит "Пумб Банк"',
+    },
+    {
+      'image': 'assets/paymentMethod/cash.png',
+      'method': 'Кредит "Sense Bank"',
+    },
+    {
+      'image': 'assets/paymentMethod/cash.png',
+      'method': 'Кредит "ОТП Банк"',
+    },
+    {
+      'image': 'assets/paymentMethod/cash.png',
+      'method': 'Кредит "Укрсиб Банк"',
+    },
+    {
+      'image': 'assets/paymentMethod/cash.png',
+      'method': 'Кредит "Глобус"',
+    },
+    {
+      'image': 'assets/paymentMethod/cash.png',
+      'method': 'Кредит "Idea Bank"',
     },
   ];
 

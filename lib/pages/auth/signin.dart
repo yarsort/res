@@ -374,14 +374,15 @@ class _SignInState extends State<SignIn> {
 
           //Проверка наличия номера телефона в базе данных
           var existCustomer = await checkExistCustomer();
-          if (!existCustomer) {
-            showScaffoldMessage(context,'Покупець не існує! Вам потрібно зарєструватися.');
+          if (existCustomer) {
+            showScaffoldMessage(context,'Покупецьз таким номером телефона вже існує! Вам потрібно увійти в додаток.');
 
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
                         SignUp()));
+
             return;
           }
 
