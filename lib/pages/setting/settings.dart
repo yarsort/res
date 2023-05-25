@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tehnotop/constants/screens.dart';
-import 'package:tehnotop/pages/setting/policy.dart';
+import 'package:res/constants/screens.dart';
+import 'package:res/pages/setting/policy.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class Settings extends StatefulWidget {

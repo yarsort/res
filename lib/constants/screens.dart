@@ -1,9 +1,9 @@
 export 'package:flutter/material.dart';
 
-export 'package:tehnotop/constants/constants.dart';
-export 'package:tehnotop/constants/functions.dart';
-export 'package:tehnotop/constants/model.dart';
-export 'package:tehnotop/widget/column_builder.dart';
+export 'package:res/constants/constants.dart';
+export 'package:res/constants/functions.dart';
+export 'package:res/constants/model.dart';
+export 'package:res/widget/column_builder.dart';
 
 export '../widget/bottom_bar.dart';
 export '../pages/home/home.dart';

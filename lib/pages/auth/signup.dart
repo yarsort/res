@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:http/http.dart' as http;
 
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tehnotop/pages/system.dart';
+import 'package:res/pages/system.dart';
 
 class SignUp extends StatefulWidget {
   @override

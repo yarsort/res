@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {

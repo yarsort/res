@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 
 class Support extends StatefulWidget {
   @override

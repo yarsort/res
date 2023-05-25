@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:tehnotop/constants/screens.dart';
-import 'package:tehnotop/pages/system.dart';
-import 'package:tehnotop/widget/column_builder.dart';
+import 'package:res/constants/screens.dart';
+import 'package:res/pages/system.dart';
+import 'package:res/widget/column_builder.dart';
 
 class OrderItemsInformation extends StatefulWidget {
   final OrderFromBase order;

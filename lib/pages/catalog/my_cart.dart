@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class MyCart extends StatefulWidget {

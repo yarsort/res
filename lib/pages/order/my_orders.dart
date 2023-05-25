@@ -1,11 +1,11 @@
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 import 'dart:convert';
-export 'package:tehnotop/constants/model.dart';
+export 'package:res/constants/model.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tehnotop/pages/system.dart';
-import 'package:tehnotop/widget/column_builder.dart';
+import 'package:res/pages/system.dart';
+import 'package:res/widget/column_builder.dart';
 
 class MyOrders extends StatefulWidget {
   @override

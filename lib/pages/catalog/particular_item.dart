@@ -1,4 +1,4 @@
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 
 class ParticularItem extends StatefulWidget {
   final tag;

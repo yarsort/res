@@ -1,5 +1,5 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 
 class Favorites extends StatefulWidget {
   @override

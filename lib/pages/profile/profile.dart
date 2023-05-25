@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 
 class Profile extends StatefulWidget {
   @override

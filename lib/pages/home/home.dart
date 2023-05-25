@@ -1,4 +1,4 @@
-import 'package:tehnotop/constants/screens.dart';
+import 'package:res/constants/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:intl/intl.dart';
